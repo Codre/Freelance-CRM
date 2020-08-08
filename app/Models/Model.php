@@ -20,5 +20,4 @@ class Model extends \Illuminate\Database\Eloquent\Model
     {
         return with(new static)->getTable();
     }
-
 }
