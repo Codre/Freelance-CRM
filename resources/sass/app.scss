@@ -6,3 +6,9 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import 'general';
+@import 'navbar';
+@import 'auth';
+@import 'profile';
+@import 'mobile';

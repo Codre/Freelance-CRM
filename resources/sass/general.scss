@@ -1,0 +1,30 @@
+header {
+    .navbar-toggler {
+        display: none;
+        border: 0;
+    }
+    .icon {
+        fill: #fff;
+    }
+}
+.content {
+    margin-right: 0;
+}
+
+.icon {
+    &.white {
+        fill: #fff;
+    }
+    &.icon-sm {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    border-top: 1px solid #e3e3e3;
+}
