@@ -5,7 +5,9 @@ namespace App\Services\Projects\Repositories;
 
 use App\Builders\QueryBuilder;
 use App\Models\Project;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class EloquentProjectsRepository implements ProjectsRepositoryInterface
 {
@@ -17,7 +19,9 @@ class EloquentProjectsRepository implements ProjectsRepositoryInterface
 
     public function search(int $limit = 20)
     {
-        return Project::paginate($limit);
+        return Project::whereHas('users', function (Builder $query) {
+            $query->where('user_id', '=', Auth::user()->id);
+        })->with(['users'])->paginate($limit);
     }
 
     public function getBy(QueryBuilder $builder): Collection

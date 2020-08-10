@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Watson\Rememberable\Rememberable;
 
 /**
@@ -32,4 +33,41 @@ use Watson\Rememberable\Rememberable;
 class ProjectUser extends Pivot
 {
     use SoftDeletes, Rememberable;
+
+    /** @var int Группа наблюдатель */
+    const GROUP_OBSERVER = 0;
+    /** @var int Группа заказчик */
+    const GROUP_CUSTOMER = 1;
+    /** @var int Группа менеджер */
+    const GROUP_MANAGER = 2;
+    /** @var int Группа исполнитель */
+    const GROUP_EXECUTOR = 3;
+
+    /**
+     * Получить список имён групп
+     * @return array
+     */
+    public static function getGroups()
+    {
+        return [
+            self::GROUP_OBSERVER => __('projects/users.groups.'.self::GROUP_OBSERVER),
+            self::GROUP_CUSTOMER => __('projects/users.groups.'.self::GROUP_CUSTOMER),
+            self::GROUP_MANAGER => __('projects/users.groups.'.self::GROUP_MANAGER),
+            self::GROUP_EXECUTOR => __('projects/users.groups.'.self::GROUP_EXECUTOR),
+        ];
+    }
+
+    /**
+     * Может ли управлять участниками
+     * @param Project $project
+     *
+     * @return bool
+     */
+    public static function canEdit(Project $project)
+    {
+        $group = $project->users->find(Auth::user()->id)->pivot->group;
+        return in_array($group, [
+            self::GROUP_MANAGER, self::GROUP_EXECUTOR
+        ]);
+    }
 }

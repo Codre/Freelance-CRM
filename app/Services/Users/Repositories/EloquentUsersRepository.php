@@ -3,11 +3,11 @@
 
 namespace App\Services\Users\Repositories;
 
-
 use App\Builders\QueryBuilder;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 
 class EloquentUsersRepository implements UsersRepositoryInterface
@@ -41,6 +41,8 @@ class EloquentUsersRepository implements UsersRepositoryInterface
     {
         if (isset($data['password']) && is_null($data['password'])) {
             unset($data['password']);
+        } else {
+            $data['password'] = Hash::make($data['password']);
         }
 
         $user->update($data);

@@ -11,6 +11,12 @@
         @endcan
     </td>
     <td>
+        @can('project.view', $item)
+            <a href="{{ route('project.users.index', ['project' => $item->id]) }}" class="btn btn-info btn-sm">
+                @materialicon('action', 'supervisor_account', 'white')
+                <span class="badge">{{ $item->users->count()  }}</span>
+            </a>
+        @endcan
         @can('project.update', $item)
             <a href="{{ route('projects.edit', ['project' => $item->id]) }}" class="btn btn-primary btn-sm">
                 @materialicon('content', 'create', 'white')

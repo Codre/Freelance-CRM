@@ -18,12 +18,18 @@ class ProjectUserSeeder extends Seeder
             if ($item->id == 1) {
                 $projects = Project::all();
             } else {
-                $projects = Project::all()->take(rand(3,10));
+                $projects = Project::all()->take(rand(3, 10));
             }
             foreach ($projects as $project) {
                 (new ProjectUser([
                     'user_id' => $item->id,
                     'project_id' => $project->id,
+                    'group' => [
+                        ProjectUser::GROUP_OBSERVER,
+                        ProjectUser::GROUP_CUSTOMER,
+                        ProjectUser::GROUP_EXECUTOR,
+                        ProjectUser::GROUP_MANAGER
+                    ][rand(0, 3)]
                 ]))->save();
             }
         }

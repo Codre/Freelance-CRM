@@ -3,7 +3,6 @@
 
 namespace App\Services\Users;
 
-
 use App\Builders\QueryBuilder;
 use App\Jobs\Queue;
 use App\Mail\Clients\InviteMail;
@@ -44,8 +43,7 @@ class UsersService
     public function __construct(
         CreateUserHandler $createUserHandler,
         UsersRepositoryInterface $usersRepository
-    )
-    {
+    ) {
         $this->createUserHandler = $createUserHandler;
         $this->usersRepository = $usersRepository;
     }

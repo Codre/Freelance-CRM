@@ -17,6 +17,7 @@ class CreateProjectUserTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
+            $table->tinyInteger('group');
             $table->timestamps();
             $table->softDeletes();
         });

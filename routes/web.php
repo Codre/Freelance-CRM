@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
         'clients'  => 'Clients\Clients',
         'projects' => 'Projects\Projects',
     ]);
+    Route::get('/projects/{project}/members/', 'Projects\ProjectUsers@index')->name('project.users.index');
 });
 
 Auth::routes(['register' => false]);
