@@ -2,9 +2,9 @@
 
 @section('content')
     @can('project.create')
-    <div class="float-right">
-        <a href="{{ route('projects.create') }}" class="btn btn-primary m-1">{{ __('projects/general.index.create') }}</a>
-    </div>
+        <div class="float-right">
+            <ProjectsCreatePopupBtn route="{{ route('projects.store') }}">@csrf</ProjectsCreatePopupBtn>
+        </div>
     @endcan
 
     <h1>{{ $title }}</h1>
@@ -33,6 +33,4 @@
             <div class="d-flex justify-content-center">{{ $list->links() }}</div>
         </div>
     </div>
-
-
 @endsection

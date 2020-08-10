@@ -3,7 +3,6 @@
 
 namespace App\Services\Projects\Repositories;
 
-
 use App\Builders\QueryBuilder;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Collection;

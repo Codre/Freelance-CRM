@@ -61,9 +61,9 @@ class Projects extends Controller
     {
         $this->authorize('project.create');
 
-        $this->projectsService->storeProject($request->getFormData());
+        $project = $this->projectsService->storeProject($request->getFormData());
 
-        return redirect(route('projects.index'));
+        return redirect(route('projects.show', ['project' => $project->id]));
     }
 
     /**

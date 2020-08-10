@@ -3,7 +3,6 @@
 
 namespace App\Services\Projects\Handlers;
 
-
 use App\Models\Project;
 use App\Services\Projects\Repositories\ProjectsRepositoryInterface;
 use Carbon\Carbon;
@@ -18,8 +17,7 @@ class CreateProjectHandler
 
     public function __construct(
         ProjectsRepositoryInterface $projectRepository
-    )
-    {
+    ) {
         $this->projectRepository = $projectRepository;
     }
 

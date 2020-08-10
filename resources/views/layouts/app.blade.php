@@ -2,7 +2,8 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? '' }} - Codre CRM</title>
 
@@ -31,7 +32,7 @@
             </div>
         @endauth
 
-        <div class="@auth col-md-9 col-lg-10 content-block @endauth @guest container @endguest">
+        <div class="@auth col-md-9 col-lg-10 content-block @endauth @guest container @endguest pb-5">
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -42,6 +43,7 @@
                 </div>
             @endif
             @yield('content')
+            <div class="clearfix mt-2"></div>
             @include('blocks.footer')
         </div>
     </div>

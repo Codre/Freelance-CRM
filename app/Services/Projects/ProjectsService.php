@@ -34,8 +34,7 @@ class ProjectsService
     public function __construct(
         CreateProjectHandler $createProjectHandler,
         ProjectsRepositoryInterface $projectsRepository
-    )
-    {
+    ) {
         $this->createProjectHandler = $createProjectHandler;
         $this->projectsRepository = $projectsRepository;
     }

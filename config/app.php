@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
+        Tohidplus\Translation\TranslationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -175,7 +177,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Arcanedev\LogViewer\LogViewerServiceProvider::class,
     ],
 
     /*
