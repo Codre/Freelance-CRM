@@ -68,11 +68,10 @@ class Projects extends Controller
 
         $this->authorize('project.view', $project);
 
-        // @todo передать список тикетов
-
         return view('projects.show')->with([
-            'project'     => $project,
-            'title'       => $project->name,
+            'project' => $project,
+            'title'   => $project->name,
+            'tasks'   => $project->tasks()->orderBy('updated_at', 'desc')->paginate(20),
         ]);
     }
 

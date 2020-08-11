@@ -10,9 +10,29 @@
 
     <div class="card profile">
         <div class="card-body">
-            <p class="mt-2 text-center">
-                @todo список тикетов
-            </p>
+            <div class="d-flex justify-content-center">{{ $tasks->links() }}</div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th class="text-center">{{__('projects/show.table.id')}}</th>
+                    <th>{{__('projects/show.table.name')}}</th>
+                    <th class="text-center">{{__('projects/show.table.status')}}</th>
+                    <th class="text-center">{{__('projects/show.table.time')}}</th>
+                    <th class="text-center">{{__('projects/show.table.finances')}}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @forelse ($tasks as $item)
+                    @include('projects.blocks.show_item')
+                @empty
+                    <tr>
+                        <td class="text-center" colspan="6">{{__('projects/show.table.empty')}}</td>
+                    </tr>
+                @endforelse
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-center">{{ $tasks->links() }}</div>
         </div>
     </div>
 @endsection

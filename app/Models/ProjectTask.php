@@ -32,6 +32,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\ProjectTask withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\ProjectTask withoutTrashed()
  * @mixin \Eloquent
+ * @property string $status
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectTask whereStatus($value)
  */
 class ProjectTask extends Model
 {

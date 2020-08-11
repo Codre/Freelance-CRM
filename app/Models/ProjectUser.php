@@ -29,6 +29,8 @@ use Watson\Rememberable\Rememberable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectUser whereProjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectUser whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectUser whereUserId($value)
+ * @property int $group
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectUser whereGroup($value)
  */
 class ProjectUser extends Pivot
 {

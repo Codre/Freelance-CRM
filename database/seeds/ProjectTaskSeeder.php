@@ -12,7 +12,7 @@ class ProjectTaskSeeder extends Seeder
     public function run()
     {
         foreach (\App\Models\Project::all() as $item) {
-            factory(\App\Models\ProjectTask::class, rand(1,10))->create([
+            factory(\App\Models\ProjectTask::class, rand(1, 10))->create([
                 'project_id'  => $item->id,
                 'user_id'     => $item->users->random()->id,
             ]);
