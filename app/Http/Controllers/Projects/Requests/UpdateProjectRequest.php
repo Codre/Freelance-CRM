@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Projects\Requests;
 
-
 use App\Http\Requests\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,5 +41,4 @@ class UpdateProjectRequest extends FormRequest
             'name' => __('attributes/project.name'),
         ];
     }
-
 }

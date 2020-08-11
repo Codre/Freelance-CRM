@@ -18,10 +18,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', 'Overview@index')->name('overview');
     Route::resources([
         'staffs'   => 'Staffs\Staffs',
-        'clients'  => 'Clients\Clients',
-        'projects' => 'Projects\Projects',
+        'clients'  => 'Clients\Clients'
     ]);
-    Route::get('/projects/{project}/members/', 'Projects\ProjectUsers@index')->name('project.users.index');
+    Route::resource('projects.members', 'Projects\ProjectMembers')->except(['show']);
+    Route::resource('projects', 'Projects\Projects')->except(['create']);
 });
 
 Auth::routes(['register' => false]);

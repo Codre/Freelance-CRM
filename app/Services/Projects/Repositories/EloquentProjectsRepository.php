@@ -5,6 +5,8 @@ namespace App\Services\Projects\Repositories;
 
 use App\Builders\QueryBuilder;
 use App\Models\Project;
+use App\Models\ProjectUser;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -33,9 +35,7 @@ class EloquentProjectsRepository implements ProjectsRepositoryInterface
 
     public function createFromArray(array $data): Project
     {
-        $project = (new Project())->create($data);
-
-        return $project;
+        return (new Project())->create($data);
     }
 
     public function updateFromArray(Project $project, array $data)
@@ -48,5 +48,15 @@ class EloquentProjectsRepository implements ProjectsRepositoryInterface
     public function delete(Project $project)
     {
         return $project->delete();
+    }
+
+    public function getAvailableForAddingUsers(Project $project): Collection
+    {
+        return User::whereNotIn('id', $project->users->map->id->toArray())->get();
+    }
+
+    public function createMemberFromArray(Project $project, array $data): ProjectUser
+    {
+        return (new ProjectUser)->create($data);
     }
 }
