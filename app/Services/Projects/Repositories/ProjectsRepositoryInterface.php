@@ -6,6 +6,7 @@ namespace App\Services\Projects\Repositories;
 use App\Builders\QueryBuilder;
 use App\Models\Project;
 use App\Models\ProjectUser;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
 interface ProjectsRepositoryInterface
@@ -20,9 +21,13 @@ interface ProjectsRepositoryInterface
 
     public function updateFromArray(Project $project, array $data);
 
-    public function delete(Project $project);
+    public function delete(Project $project): ?bool;
 
     public function getAvailableForAddingUsers(Project $project): Collection;
 
     public function createMemberFromArray(Project $project, array $data): ProjectUser;
+
+    public function updateMemberFromArray(Project $project, User $user, array $data): ProjectUser;
+
+    public function deleteMember(Project $project, User $user): ?bool;
 }

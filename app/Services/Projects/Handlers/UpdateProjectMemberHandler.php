@@ -4,9 +4,10 @@ namespace App\Services\Projects\Handlers;
 
 use App\Models\Project;
 use App\Models\ProjectUser;
+use App\Models\User;
 use App\Services\Projects\Repositories\ProjectsRepositoryInterface;
 
-class CreateProjectMemberHandler
+class UpdateProjectMemberHandler
 {
     /**
      * @var ProjectsRepositoryInterface
@@ -21,10 +22,11 @@ class CreateProjectMemberHandler
     }
 
 
-    public function handle(Project $project, array $data): ProjectUser
+    public function handle(Project $project, User $user, array $data): ProjectUser
     {
-        $data['project_id'] = $project->id;
 
-        return $this->projectRepository->createMemberFromArray($project, $data);
+        return $this->projectRepository->updateMemberFromArray($project, $user, [
+            'group' => $data['group'] ?? 0,
+        ]);
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Services\Projects\Repositories;
 
 use App\Builders\QueryBuilder;
@@ -45,7 +44,7 @@ class EloquentProjectsRepository implements ProjectsRepositoryInterface
         return $project;
     }
 
-    public function delete(Project $project)
+    public function delete(Project $project): ?bool
     {
         return $project->delete();
     }
@@ -58,5 +57,19 @@ class EloquentProjectsRepository implements ProjectsRepositoryInterface
     public function createMemberFromArray(Project $project, array $data): ProjectUser
     {
         return (new ProjectUser)->create($data);
+    }
+
+    public function updateMemberFromArray(Project $project, User $user, array $data): ProjectUser
+    {
+        $projectUser = ProjectUser::whereProjectId($project->id)->whereUserId($user->id);
+
+        $projectUser->update($data);
+
+        return $projectUser->first();
+    }
+
+    public function deleteMember(Project $project, User $user): ?bool
+    {
+        return (bool)$project->users()->detach($user->id);
     }
 }

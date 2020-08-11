@@ -28,8 +28,7 @@ class UpdateProjectUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'exists:users,id'],
-            'group_id' => [Rule::in(array_keys(ProjectUser::getGroups()))]
+            'group_id' => [Rule::in(array_keys(ProjectUser::getGroups()))],
         ];
     }
 
@@ -41,7 +40,7 @@ class UpdateProjectUserRequest extends FormRequest
     public function attributes()
     {
         return [
-            'user_id' => __('attributes/project.member.user_id'),
+            'user_id'  => __('attributes/project.member.user_id'),
             'group_id' => __('attributes/project.member.group_id'),
         ];
     }
