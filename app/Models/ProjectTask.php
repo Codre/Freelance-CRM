@@ -48,6 +48,21 @@ class ProjectTask extends Model
     protected $fillable = ['title', 'description', 'project_id', 'user_id', 'status'];
 
     /**
+     * Получить список имён статусов
+     * @return array
+     */
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_NEW      => __('projects/tasks.status_' . self::STATUS_NEW),
+            self::STATUS_PROCESS  => __('projects/tasks.status_' . self::STATUS_PROCESS),
+            self::STATUS_PAUSE    => __('projects/tasks.status_' . self::STATUS_PAUSE),
+            self::STATUS_READY    => __('projects/tasks.status_' . self::STATUS_READY),
+            self::STATUS_FINISHED => __('projects/tasks.status_' . self::STATUS_FINISHED),
+        ];
+    }
+
+    /**
      * Получить проект задачи
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

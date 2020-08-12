@@ -3,7 +3,7 @@
 
 namespace App\Services\ProjectTasks\Repositories;
 
-
+use App\Models\Project;
 use App\Models\ProjectTask;
 
 interface ProjectTasksRepositoryInterface
@@ -14,7 +14,7 @@ interface ProjectTasksRepositoryInterface
 
     public function createFromArray(array $data): ProjectTask;
 
-    public function updateFromArray(ProjectTask $project, array $data);
+    public function updateFromArray(ProjectTask $task, array $data): ProjectTask;
 
-    public function delete(ProjectTask $project);
+    public function delete(ProjectTask $task): ?bool;
 }

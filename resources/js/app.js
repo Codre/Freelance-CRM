@@ -7,6 +7,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.Summernote = require('summernote');
+window.Summernote = require('summernote/lang/summernote-ru-RU');
 
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
@@ -37,3 +39,5 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0].toLower
 const app = new Vue({
     el: '#app',
 });
+
+require('./editor')

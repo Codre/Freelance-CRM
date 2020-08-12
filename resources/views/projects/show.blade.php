@@ -2,9 +2,14 @@
 
 @section('content')
     @can('project.update', $project)
-    <div class="float-right">
-        <a href="{{ route('projects.edit', ['project' => $project['id']]) }}" class="btn btn-primary m-1">{{ __('projects/show.change') }}</a>
-    </div>
+        <div class="float-right">
+            @can('projectTask.create', $project)
+                <a href="{{ route('projects.tasks.create', ['project' => $project['id']]) }}"
+                   class="btn btn-success m-1">{{ __('projects/show.create_task') }}</a>
+            @endcan
+            <a href="{{ route('projects.edit', ['project' => $project['id']]) }}"
+               class="btn btn-primary m-1">{{ __('projects/show.change') }}</a>
+        </div>
     @endcan
     <h1>{{ $title }}</h1>
 

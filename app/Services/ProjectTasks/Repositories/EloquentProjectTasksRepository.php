@@ -3,7 +3,7 @@
 
 namespace App\Services\ProjectTasks\Repositories;
 
-
+use App\Models\Project;
 use App\Models\ProjectTask;
 
 class EloquentProjectTasksRepository implements ProjectTasksRepositoryInterface
@@ -21,21 +21,18 @@ class EloquentProjectTasksRepository implements ProjectTasksRepositoryInterface
 
     public function createFromArray(array $data): ProjectTask
     {
-        $project = new ProjectTask();
-        $project->create($data);
-
-        return $project;
+        return (new ProjectTask())->create($data);
     }
 
-    public function updateFromArray(ProjectTask $project, array $data)
+    public function updateFromArray(ProjectTask $task, array $data): ProjectTask
     {
-        $project->update($data);
+        $task->update($data);
 
-        return $project;
+        return $task;
     }
 
-    public function delete(ProjectTask $project)
+    public function delete(ProjectTask $task): ?bool
     {
-        return $project->delete();
+        return $task->delete();
     }
 }

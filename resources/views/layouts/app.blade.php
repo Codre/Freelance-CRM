@@ -42,6 +42,14 @@
                     </ul>
                 </div>
             @endif
+            @isset($back)
+                <div class="float-left m-1">
+                    <a href="{{ $back }}" class="btn btn-light"
+                       v-b-tooltip.hover title="{{ $backTitle ?? __('app.back') }}">
+                        @materialicon('navigation', 'arrow_back')
+                    </a>
+                </div>
+                @endisset
             @yield('content')
             <div class="clearfix mt-2"></div>
             @include('blocks.footer')

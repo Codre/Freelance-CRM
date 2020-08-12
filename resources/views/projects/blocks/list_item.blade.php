@@ -2,7 +2,12 @@
 /** @var \App\Models\Project $item */
 ?>
 <tr>
-    <td class="text-center">{{ $item->id }}</td>
+    <td class="text-center">
+        @can('project.view', $item)
+            {{ link_to(route('projects.show', ['project' => $item->id]), $item->id) }}
+        @else
+            {{ $item->id }}
+        @endcan
     <td>
         @can('project.view', $item)
             {{ link_to(route('projects.show', ['project' => $item->id]), $item->name) }}

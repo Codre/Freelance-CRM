@@ -45,6 +45,11 @@ class ProjectUser extends Pivot
     /** @var int Группа исполнитель */
     const GROUP_EXECUTOR = 3;
 
+    /** @var int[] Кто может создавать таски */
+    const CAN_CREATE_TASKS = [
+        self::GROUP_MANAGER, self::GROUP_EXECUTOR, self::GROUP_CUSTOMER
+    ];
+
     /**
      * Получить список имён групп
      *

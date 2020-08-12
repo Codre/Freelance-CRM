@@ -11,7 +11,6 @@
     },
     "devDependencies": {
         "axios": "^0.19",
-        "bootstrap": "^4.0.0",
         "browser-sync": "^2.26.12",
         "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^7.0",
@@ -26,8 +25,9 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "bootstrap": "^4.4.1",
+        "bootstrap": "^4.0.0",
         "bootstrap-vue": "^2.16.0",
+        "summernote": "^0.8.18",
         "vue-i18n": "^8.20.0"
     }
 }

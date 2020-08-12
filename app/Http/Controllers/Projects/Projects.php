@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Projects;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Projects\Requests\StoreProjectRequest;
 use App\Http\Controllers\Projects\Requests\UpdateProjectRequest;
+use App\Models\ProjectTask;
 use App\Services\Projects\ProjectsService;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 
 class Projects extends Controller
 {
@@ -23,7 +28,8 @@ class Projects extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
+     * @throws AuthorizationException
      */
     public function index()
     {
@@ -32,8 +38,8 @@ class Projects extends Controller
         $list = $this->projectsService->searchProjects();
 
         return view('projects.index')->with([
-            'list'        => $list,
-            'title'       => __("projects/general.title"),
+            'list'  => $list,
+            'title' => __("projects/general.title"),
         ]);
     }
 
@@ -41,7 +47,9 @@ class Projects extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreProjectRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     *
+     * @return RedirectResponse|Redirector
+     * @throws AuthorizationException
      */
     public function store(StoreProjectRequest $request)
     {
@@ -56,7 +64,9 @@ class Projects extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\View\View
+     *
+     * @return View
+     * @throws AuthorizationException
      */
     public function show(int $id)
     {
@@ -68,10 +78,17 @@ class Projects extends Controller
 
         $this->authorize('project.view', $project);
 
+        $tasks = $project->tasks()
+            ->with(['user', 'project'])
+            ->orderBy('updated_at', 'desc')
+            ->paginate(20);
+
         return view('projects.show')->with([
-            'project' => $project,
-            'title'   => $project->name,
-            'tasks'   => $project->tasks()->orderBy('updated_at', 'desc')->paginate(20),
+            'project'  => $project,
+            'title'    => $project->name,
+            'statuses' => ProjectTask::getStatuses(),
+            'tasks'    => $tasks,
+            'back'     => route('projects.index'),
         ]);
     }
 
@@ -79,7 +96,9 @@ class Projects extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\View\View
+     *
+     * @return View
+     * @throws AuthorizationException
      */
     public function edit(int $id)
     {
@@ -93,7 +112,8 @@ class Projects extends Controller
 
         return view('projects.edit')->with([
             'project' => $project,
-            'title' => __("projects/edit.title")
+            'title'   => __("projects/edit.title"),
+            'back'    => route('projects.show', ['project' => $project]),
         ]);
     }
 
@@ -103,7 +123,8 @@ class Projects extends Controller
      * @param UpdateProjectRequest $request
      * @param int                  $id
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
+     * @throws AuthorizationException
      */
     public function update(UpdateProjectRequest $request, $id)
     {
@@ -119,11 +140,14 @@ class Projects extends Controller
 
         return redirect(route('projects.show', ['project' => $project->id]));
     }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     *
+     * @return RedirectResponse|Redirector
+     * @throws AuthorizationException
      */
     public function destroy($id)
     {

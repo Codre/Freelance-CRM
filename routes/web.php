@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
         'clients'  => 'Clients\Clients'
     ]);
     Route::resource('projects.members', 'Projects\ProjectMembers')->except(['show']);
+    Route::resource('projects.tasks', 'Projects\ProjectTasks')->except(['index']);
     Route::resource('projects', 'Projects\Projects')->except(['create']);
 });
 
