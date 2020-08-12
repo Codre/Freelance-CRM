@@ -1,38 +1,50 @@
 <?php
 
 return [
-    'status_new' => 'Новая',
-    'status_process' => 'В работе',
-    'status_pause' => 'В ожидание',
-    'status_ready' => 'На проверке',
+    'status_new'      => 'Новая',
+    'status_process'  => 'В работе',
+    'status_pause'    => 'В ожидание',
+    'status_ready'    => 'На проверке',
     'status_finished' => 'Завершена',
-    'create' => [
+    'create'          => [
         'title' => 'Создать задачу',
-        'form' => [
-          'title' => [
-              'label' => 'Тема',
-              'placeholder' => 'Кратко опишите задачу'
-          ],
-          'description' => [
-              'label' => 'Описание',
-          ],
-          'submit' => 'Создать задачу'
+        'form'  => [
+            'title'       => [
+                'label'       => 'Тема',
+                'placeholder' => 'Кратко опишите задачу',
+            ],
+            'description' => [
+                'label' => 'Описание',
+            ],
+            'submit'      => 'Создать задачу',
         ],
     ],
-    'edit' => [
+    'edit'            => [
         'title' => 'Редактирование задачи',
-        'form' => [
-          'title' => [
-              'label' => 'Тема',
-              'placeholder' => 'Кратко опишите задачу'
-          ],
-          'description' => [
-              'label' => 'Описание',
-          ],
-          'submit' => 'Сохранить'
+        'form'  => [
+            'title'       => [
+                'label'       => 'Тема',
+                'placeholder' => 'Кратко опишите задачу',
+            ],
+            'description' => [
+                'label' => 'Описание',
+            ],
+            'submit'      => 'Сохранить',
         ],
     ],
-    'show' => [
-        'change' => 'Редактировать'
+    'show'            => [
+        'change' => 'Редактировать',
+    ],
+    'comments'        => [
+        'title' => 'Комментарии',
+        'form'  => [
+            'text' => [
+                'placeholder' => 'Напишите свой комментарий...'
+            ],
+            'submit' => 'Отправить'
+        ],
+        'item' => [
+            'user' => 'От: ',
+        ]
     ],
 ];

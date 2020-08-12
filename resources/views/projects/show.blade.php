@@ -13,7 +13,7 @@
     @endcan
     <h1>{{ $title }}</h1>
 
-    <div class="card profile">
+    <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-center">{{ $tasks->links() }}</div>
             <table class="table table-bordered table-hover">

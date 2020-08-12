@@ -7,7 +7,7 @@
 @section('content')
     <h1>{{ $title }}</h1>
 
-    <div class="card profile">
+    <div class="card">
         {!! Form::open( ['route' => ['projects.members.update', 'project' => $project, 'member' => $member], 'method' => 'PATCH']) !!}
         <div class="card-body">
             <div class="form-group">

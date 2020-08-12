@@ -1,9 +1,7 @@
 <?php
 
-
 namespace App\Services\ProjectTasks\Repositories;
 
-use App\Models\Project;
 use App\Models\ProjectTask;
 
 class EloquentProjectTasksRepository implements ProjectTasksRepositoryInterface

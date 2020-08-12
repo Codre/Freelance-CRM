@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('projects.members', 'Projects\ProjectMembers')->except(['show']);
     Route::resource('projects.tasks', 'Projects\ProjectTasks')->except(['index']);
     Route::resource('projects', 'Projects\Projects')->except(['create']);
+    Route::resource('projects.tasks.comments', 'Projects\TaskComment')->only(['store']);
 });
 
 Auth::routes(['register' => false]);

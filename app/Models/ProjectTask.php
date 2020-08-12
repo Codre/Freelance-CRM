@@ -79,4 +79,13 @@ class ProjectTask extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Получить комментарии задачи
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(TaskComment::class, 'task_id');
+    }
 }

@@ -35,6 +35,8 @@ class TaskComment extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = ['text', 'user_id', 'task_id'];
+
     /**
      * Получить задачу комментария
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

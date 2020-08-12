@@ -76,9 +76,12 @@ class ProjectTasks extends Controller
     {
         $this->authorize('projectTask.view', $task);
 
+        $comments = $task->comments()->orderBy('created_at', 'desc')->with(['user'])->get();
+
         return view('projects.tasks.show')->with([
             'title'   => $project->name . " - " . $task->title,
             'project' => $project,
+            'comments' => $comments,
             'task'    => $task,
             'back'    => route('projects.show', ['project' => $project]),
         ]);

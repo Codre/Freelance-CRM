@@ -6,7 +6,7 @@
 @section('content')
     <h1>{{ $title }}</h1>
 
-    <div class="card profile">
+    <div class="card">
         {!! Form::open( ['route' => ['projects.members.store', 'project' => $project], 'method' => 'POST']) !!}
         <div class="card-body">
             <div class="form-group">
