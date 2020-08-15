@@ -8,10 +8,12 @@ use App\Jobs\Queue;
 use App\Mail\Clients\InviteMail;
 use App\Models\User;
 use App\Services\Users\Exceptions\IncorrectUserException;
+use App\Services\Users\Exceptions\UserNotFoundException;
 use App\Services\Users\Handlers\CreateUserHandler;
 use App\Services\Users\Repositories\UsersRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Database\Eloquent\Collection;
@@ -197,5 +199,33 @@ class UsersService
                 throw new \Exception("Undefined result: " . $result);
             break;
         }
+    }
+
+    /**
+     * Проверка переданных данных на странице приглашения пользователя
+     *
+     * @param int|null    $id
+     * @param string|null $key
+     * @param string|null $hash
+     *
+     * @return User
+     * @throws IncorrectUserException
+     * @throws UserNotFoundException
+     */
+    public function getInviteUser(?int $id, ?string $key, ?string $hash): User
+    {
+        if (!$id || !$key || !$hash || !($user = User::find($id))) {
+            throw new UserNotFoundException();
+        }
+
+        if (!Hash::check(join('|', [$user->id, $user->email, $key]), $hash)) {
+            throw new IncorrectUserException();
+        }
+
+        if ($user->email_verified_at) {
+            throw new IncorrectUserException();
+        }
+
+        return $user;
     }
 }

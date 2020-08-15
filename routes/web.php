@@ -27,3 +27,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Auth::routes(['register' => false]);
+
+Route::get('client/invite/', 'Clients\Invite@index')->name('client.invite');
+Route::post('client/invite/', 'Clients\Invite@store')->name('client.invite.store');

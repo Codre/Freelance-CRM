@@ -32,9 +32,7 @@ class EloquentUsersRepository implements UsersRepositoryInterface
 
     public function createFromArray(array $data): User
     {
-        $user = (new User())->create($data);
-
-        return $user;
+        return (new User())->create($data);
     }
 
     public function updateFromArray(User $user, array $data): User

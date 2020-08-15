@@ -7,6 +7,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Hash;
+
 
 /**
  * Class ClientInviteMail
@@ -25,6 +27,11 @@ class InviteMail extends Mailable
     public $user;
 
     /**
+     * @var string[]
+     */
+    public $routeParams;
+
+    /**
      * Create a new message instance.
      *
      * @param User $user
@@ -33,6 +40,13 @@ class InviteMail extends Mailable
     {
         $this->user = $user;
         $this->subject = __('emails/clients.invite.title');
+
+        $key = Hash::make(app(\Faker\Generator::class)->password);
+        $this->routeParams = [
+            'id' => $user->id,
+            'key' => $key,
+            'hash' => Hash::make(join('|', [$user->id, $user->email, $key]))
+        ];
     }
 
     /**
