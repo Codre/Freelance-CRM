@@ -4,7 +4,6 @@ namespace App\Services\ProjectTasks\Handlers;
 
 use App\Jobs\Queue;
 use App\Mail\ProjectTasks\CreatedMail;
-use App\Mail\ProjectTasks\FinishedMail;
 use App\Models\ProjectTask;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;

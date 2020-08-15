@@ -38,6 +38,8 @@ class UpdatedMail extends Mailable
         $this->projectTask = $projectTask;
         $this->user = $user;
         $this->who = $who;
+
+        $this->subject = __('emails/projects/tasks.updated.subject', ['task' => $this->projectTask->title]);
     }
 
     /**

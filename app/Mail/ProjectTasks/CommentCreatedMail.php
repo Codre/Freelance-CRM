@@ -3,20 +3,21 @@
 namespace App\Mail\ProjectTasks;
 
 use App\Models\ProjectTask;
+use App\Models\TaskComment;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class CreatedMail extends Mailable
+class CommentCreatedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * @var ProjectTask
+     * @var TaskComment
      */
-    public $projectTask;
+    public $comment;
     /**
      * @var User
      */
@@ -25,21 +26,32 @@ class CreatedMail extends Mailable
      * @var User
      */
     public $who;
+    /**
+     * @var ProjectTask
+     */
+    public $task;
+    /**
+     * @var mixed
+     */
+    public $project;
 
     /**
      * Create a new message instance.
      *
-     * @param ProjectTask $projectTask
+     * @param TaskComment $comment
      * @param User        $user
      * @param User        $who
      */
-    public function __construct(ProjectTask $projectTask, User $user, User $who)
+    public function __construct(TaskComment $comment, User $user, User $who)
     {
-        $this->projectTask = $projectTask;
+        $this->comment = $comment;
         $this->user = $user;
         $this->who = $who;
 
-        $this->subject = __('emails/projects/tasks.created.subject', ['task' => $this->projectTask->title]);
+        $this->task = $comment->task;
+        $this->project = $this->task->project;
+
+        $this->subject = __('emails/projects/comments.created.subject', ['task' => $this->task->title]);
     }
 
     /**
@@ -49,6 +61,6 @@ class CreatedMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.projectTasks.created');
+        return $this->view('emails.projectTasks.comments.created');
     }
 }

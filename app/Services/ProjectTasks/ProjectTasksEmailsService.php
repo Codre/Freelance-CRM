@@ -2,6 +2,7 @@
 
 namespace App\Services\ProjectTasks;
 
+use App\Models\Project;
 use App\Models\ProjectTask;
 use App\Models\User;
 use App\Services\ProjectTasks\Exceptions\AllProjectUsersMethodNotFoundException;
@@ -62,7 +63,7 @@ class ProjectTasksEmailsService
             throw new AllProjectUsersMethodNotFoundException();
         }
 
-        foreach ($projectTask->project()->get()->first()->users()->get() as $user) {
+        foreach ($projectTask->project->users()->whereNotIn('user_id', [$who->id])->get() as $user) {
             $this->{$method}($projectTask, $user, $who);
         }
     }

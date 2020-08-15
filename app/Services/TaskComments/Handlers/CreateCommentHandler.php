@@ -2,6 +2,8 @@
 
 namespace App\Services\TaskComments\Handlers;
 
+use App\Jobs\Projects\CommentCreating;
+use App\Jobs\Queue;
 use App\Models\ProjectTask;
 use App\Models\TaskComment;
 use App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface;
@@ -26,6 +28,10 @@ class CreateCommentHandler
         $data['task_id'] = $task->id;
         $data['user_id'] = \Auth::id();
 
-        return $this->taskCommentsRepository->createFromArray($data);
+        $comment = $this->taskCommentsRepository->createFromArray($data);
+
+        CommentCreating::dispatch($comment, \Auth::user())->onQueue(Queue::LOW);
+
+        return $comment;
     }
 }

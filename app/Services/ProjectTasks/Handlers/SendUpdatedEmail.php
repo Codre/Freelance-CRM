@@ -3,7 +3,6 @@
 namespace App\Services\ProjectTasks\Handlers;
 
 use App\Jobs\Queue;
-use App\Mail\ProjectTasks\FinishedMail;
 use App\Mail\ProjectTasks\UpdatedMail;
 use App\Models\ProjectTask;
 use App\Models\User;
