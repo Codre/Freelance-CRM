@@ -3,6 +3,8 @@
 
 namespace App\Services\ProjectTasks\Handlers;
 
+use App\Jobs\Projects\TaskCreating;
+use App\Jobs\Queue;
 use App\Models\Project;
 use App\Models\ProjectTask;
 use App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface;
@@ -36,6 +38,10 @@ class CreateTaskHandler
         $data['user_id'] = \Auth::id();
         $data['status'] = ProjectTask::STATUS_NEW;
 
-        return $this->projectTasksRepository->createFromArray($data);
+        $task =  $this->projectTasksRepository->createFromArray($data);
+
+        TaskCreating::dispatch($task, \Auth::user())->onQueue(Queue::LOW);
+
+        return $task;
     }
 }

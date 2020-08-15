@@ -43,6 +43,7 @@ class ProjectMembers extends Controller
             'groups'  => ProjectUser::getGroups(),
             'canEdit' => ProjectUser::canEdit($project),
             'project' => $project,
+            'back'    => route('projects.index'),
         ]);
     }
 
@@ -68,6 +69,7 @@ class ProjectMembers extends Controller
             'project'            => $project,
             'availableForAdding' => $availableForAdding,
             'groups'             => ProjectUser::getGroups(),
+            'back'               => route('projects.members.index', ['project' => $project]),
         ]);
     }
 
@@ -127,6 +129,7 @@ class ProjectMembers extends Controller
             'project' => $project,
             'member'  => $member,
             'groups'  => ProjectUser::getGroups(),
+            'back'    => route('projects.members.index', ['project' => $project]),
         ]);
     }
 

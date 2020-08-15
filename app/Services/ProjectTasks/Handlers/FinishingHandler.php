@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Services\ProjectTasks\Handlers;
-
 
 use App\Jobs\Projects\TaskFinishing;
 use App\Jobs\Queue;
@@ -41,6 +39,6 @@ class FinishingHandler
         $task = $this->projectTasksRepository->find($id);
         $this->projectTasksRepository->updateFromArray($task, ['status' => ProjectTask::STATUS_FINISHED]);
 
-        TaskFinishing::dispatch($task)->onQueue(Queue::LOW);
+        TaskFinishing::dispatch($task, \Auth::user())->onQueue(Queue::LOW);
     }
 }

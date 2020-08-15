@@ -30,8 +30,7 @@ class ProjectUsersService
         ProjectsRepositoryInterface $projectsRepository,
         CreateProjectMemberHandler $createProjectMemberHandler,
         UpdateProjectMemberHandler $updateProjectMemberHandler
-    )
-    {
+    ) {
 
         $this->projectsRepository = $projectsRepository;
         $this->createProjectMemberHandler = $createProjectMemberHandler;
@@ -45,7 +44,7 @@ class ProjectUsersService
 
     public function storeMember(Project $project, array $data): ProjectUser
     {
-        $this->createProjectMemberHandler->handle($project, $data);
+        return $this->createProjectMemberHandler->handle($project, $data);
     }
 
     public function updateMember(Project $project, User $user, array $data): ProjectUser

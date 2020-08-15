@@ -3,6 +3,8 @@
 
 namespace App\Services\ProjectTasks\Handlers;
 
+use App\Jobs\Projects\TaskUpdating;
+use App\Jobs\Queue;
 use App\Models\ProjectTask;
 use App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface;
 
@@ -30,6 +32,10 @@ class UpdateTaskHandler
 
     public function handle(ProjectTask $task, array $data): ProjectTask
     {
-        return $this->projectTasksRepository->updateFromArray($task, $data);
+        $task = $this->projectTasksRepository->updateFromArray($task, $data);
+
+        TaskUpdating::dispatch($task, \Auth::user())->onQueue(Queue::LOW);
+
+        return $task;
     }
 }

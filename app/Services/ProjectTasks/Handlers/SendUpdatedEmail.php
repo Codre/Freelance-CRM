@@ -4,18 +4,19 @@ namespace App\Services\ProjectTasks\Handlers;
 
 use App\Jobs\Queue;
 use App\Mail\ProjectTasks\FinishedMail;
+use App\Mail\ProjectTasks\UpdatedMail;
 use App\Models\ProjectTask;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * Class SendFinishedEmail
+ * Class SendUpdatedEmail
  *
- * Отправка e-mail уведомления о завершение таска
+ * Отправка e-mail уведомления о обновление таска
  *
  * @package App\Services\ProjectTasks\Handlers
  */
-class SendFinishedEmail
+class SendUpdatedEmail
 {
 
     /**
@@ -26,7 +27,7 @@ class SendFinishedEmail
     public function handle(ProjectTask $projectTask, User $user, User $who)
     {
         Mail::to($user)->queue(
-            (new FinishedMail($projectTask, $user, $who))->onQueue(Queue::EMAILS)
+            (new UpdatedMail($projectTask, $user, $who))->onQueue(Queue::EMAILS)
         );
     }
 

@@ -12,7 +12,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class TaskFinishing implements ShouldQueue
+class TaskCreating implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -24,6 +24,7 @@ class TaskFinishing implements ShouldQueue
      * @var User
      */
     private $who;
+
 
     /**
      * Create a new job instance.
@@ -48,8 +49,7 @@ class TaskFinishing implements ShouldQueue
     public function handle(
         ProjectTasksEmailsService $projectTasksEmailsService
     ) {
-        // @todo add to bill
 
-        $projectTasksEmailsService->forAllProjectUsers($this->task, 'finished', $this->who);
+        $projectTasksEmailsService->forAllProjectUsers($this->task, 'created', $this->who);
     }
 }
