@@ -37,6 +37,10 @@ class TaskComment extends Model
 
     protected $fillable = ['text', 'user_id', 'task_id'];
 
+    protected $dates = [
+        'created_at', 'updated_at'
+    ];
+
     /**
      * Получить задачу комментария
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

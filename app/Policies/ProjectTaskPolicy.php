@@ -9,6 +9,11 @@ use App\Models\ProjectUser;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+/**
+ * Class ProjectTaskPolicy
+ *
+ * @package App\Policies
+ */
 class ProjectTaskPolicy
 {
     use HandlesAuthorization;
@@ -103,5 +108,49 @@ class ProjectTaskPolicy
     public function forceDelete(User $user, ProjectTask $projectTask)
     {
         return $user->group_id == Group::STAFF_ADMIN;
+    }
+
+    /**
+     * Возможность начать выполнение задачи
+     *
+     * @param User        $user
+     * @param ProjectTask $projectTask
+     *
+     * @return bool
+     */
+    public function run(User $user, ProjectTask $projectTask)
+    {
+        if (in_array($projectTask->status, [ProjectTask::STATUS_FINISHED, ProjectTask::STATUS_READY])) {
+            return false;
+        }
+
+        if (!in_array(
+            $projectTask->project->users->find($user->id)->pivot->group,
+            [ProjectUser::GROUP_MANAGER, ProjectUser::GROUP_EXECUTOR]
+        )) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Может ли видеть затраченное время
+     *
+     * @param User        $user
+     * @param ProjectTask $projectTask
+     *
+     * @return bool
+     */
+    public function viewTime(User $user, ProjectTask $projectTask): bool
+    {
+        if (!in_array(
+            $projectTask->project->users->find($user->id)->pivot->group,
+            [ProjectUser::GROUP_MANAGER, ProjectUser::GROUP_EXECUTOR]
+        )) {
+            return false;
+        }
+
+        return true;
     }
 }

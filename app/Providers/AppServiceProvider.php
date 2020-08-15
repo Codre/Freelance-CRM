@@ -12,6 +12,8 @@ use App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository;
 use App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface;
 use App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository;
 use App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface;
+use App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository;
+use App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface;
 use App\Services\Users\Repositories\EloquentUsersRepository;
 use App\Services\Users\Repositories\UsersRepositoryInterface;
 use Illuminate\Support\Facades\Blade;
@@ -36,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ProjectsRepositoryInterface::class, EloquentProjectsRepository::class);
         $this->app->bind(ProjectTasksRepositoryInterface::class, EloquentProjectTasksRepository::class);
         $this->app->bind(TaskCommentsRepositoryInterface::class, EloquentTaskCommentsRepository::class);
+        $this->app->bind(TaskTimesRepositoryInterface::class, EloquentTaskTimesRepository::class);
     }
 
     /**

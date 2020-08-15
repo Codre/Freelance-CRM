@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\Localize;
+use App\Http\Middleware\RanTask;
 use App\Http\Middleware\ShareCommon;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -39,7 +40,8 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
            // 'localize',
-            'share.common'
+            'share.common',
+            'run.task'
         ],
 
         'api' => [
@@ -68,5 +70,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'localize' => Localize::class,
         'share.common' => ShareCommon::class,
+        'run.task' => RanTask::class,
     ];
 }

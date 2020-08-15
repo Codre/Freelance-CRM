@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @mixin \Eloquent
  * @property string $status
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectTask whereStatus($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TaskComment[] $comments
+ * @property-read int|null $comments_count
  */
 class ProjectTask extends Model
 {
@@ -87,5 +89,14 @@ class ProjectTask extends Model
     public function comments()
     {
         return $this->hasMany(TaskComment::class, 'task_id');
+    }
+
+    /**
+     * Получить время таска
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function times()
+    {
+        return $this->hasMany(TaskTimes::class, 'task_id');
     }
 }

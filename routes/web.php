@@ -24,6 +24,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('projects.tasks', 'Projects\ProjectTasks')->except(['index']);
     Route::resource('projects', 'Projects\Projects')->except(['create']);
     Route::resource('projects.tasks.comments', 'Projects\TaskComment')->only(['store']);
+
+    Route::post('projects/{project}}/tasks/{task}/run', 'Projects\ProjectTasks@run')
+        ->name('projects.tasks.run');
 });
 
 Auth::routes(['register' => false]);

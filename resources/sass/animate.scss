@@ -1,0 +1,22 @@
+.btn {
+    &.btn-info {
+        &.btn-animate {
+        transition: all .25s ease-in;
+        animation: btn-animate-info 2s infinite ease;
+        }
+    }
+}
+
+@keyframes btn-animate-info {
+    0% {
+        background-color: #6cb2eb;
+    }
+
+    50% {
+        background-color: #7fc0f5;
+    }
+
+    100% {
+        background-color: #6cb2eb;
+    }
+}

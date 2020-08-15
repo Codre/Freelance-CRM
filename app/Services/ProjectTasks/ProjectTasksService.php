@@ -48,8 +48,7 @@ class ProjectTasksService
         CreateTaskHandler $createTaskHandler,
         UpdateTaskHandler $updateTaskHandler,
         ProjectTasksRepositoryInterface $projectTasksRepository
-    )
-    {
+    ) {
         $this->finishingHandler = $finishingHandler;
         $this->createTaskHandler = $createTaskHandler;
         $this->updateTaskHandler = $updateTaskHandler;
@@ -96,5 +95,32 @@ class ProjectTasksService
     public function delete(ProjectTask $task): ?bool
     {
         return $this->projectTasksRepository->delete($task);
+    }
+
+    /**
+     * Установить статус в процессе
+     * @param ProjectTask $task
+     *
+     * @return ProjectTask
+     */
+    public function setStatusProcess(ProjectTask $task): ProjectTask
+    {
+        return $this->projectTasksRepository->updateFromArray($task, [
+            'status' => ProjectTask::STATUS_PROCESS
+        ]);
+    }
+
+    /**
+     * Установить статус остановлен
+     *
+     * @param ProjectTask $task
+     *
+     * @return ProjectTask
+     */
+    public function setStatusPause(ProjectTask $task): ProjectTask
+    {
+        return $this->projectTasksRepository->updateFromArray($task, [
+            'status' => ProjectTask::STATUS_PAUSE
+        ]);
     }
 }
