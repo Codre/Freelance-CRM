@@ -6,6 +6,7 @@ use App\Models\ProjectTask;
 use App\Models\TaskTimes;
 use App\Services\TaskTimes\Handlers\RunTaskHandler;
 use App\Services\TaskTimes\Handlers\StopTaskHandler;
+use App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface;
 
 /**
  * Class TaskTimesService
@@ -22,19 +23,26 @@ class TaskTimesService
      * @var StopTaskHandler
      */
     private $stopTaskHandler;
+    /**
+     * @var TaskTimesRepositoryInterface
+     */
+    private $repository;
 
     /**
      * TaskTimesService constructor.
      *
-     * @param RunTaskHandler  $runTaskHandler
-     * @param StopTaskHandler $stopTaskHandler
+     * @param RunTaskHandler               $runTaskHandler
+     * @param StopTaskHandler              $stopTaskHandler
+     * @param TaskTimesRepositoryInterface $repository
      */
     public function __construct(
         RunTaskHandler $runTaskHandler,
-        StopTaskHandler $stopTaskHandler
+        StopTaskHandler $stopTaskHandler,
+        TaskTimesRepositoryInterface $repository
     ) {
         $this->runTaskHandler = $runTaskHandler;
         $this->stopTaskHandler = $stopTaskHandler;
+        $this->repository = $repository;
     }
 
     /**
@@ -59,5 +67,18 @@ class TaskTimesService
     public function stop(TaskTimes $taskTimes): TaskTimes
     {
         return $this->stopTaskHandler->handle($taskTimes);
+    }
+
+    /**
+     * Обновить комментарий
+     *
+     * @param TaskTimes $taskTimes
+     * @param string    $comment
+     *
+     * @return TaskTimes
+     */
+    public function updateComment(TaskTimes $taskTimes, string $comment): TaskTimes
+    {
+        return $this->repository->updateFromArray($taskTimes, ['comment' => $comment]);
     }
 }

@@ -9,6 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 window.Summernote = require('summernote');
 window.Summernote = require('summernote/lang/summernote-ru-RU');
+window.nl2br  = require('nl2br');
 
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'

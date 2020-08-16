@@ -1,5 +1,7 @@
 <?php
 /** @var \App\Models\TaskTimes $timeStarted */
+/** @var \App\Models\ProjectTask $task */
+/** @var \Illuminate\Database\Eloquent\Collection $times */
 ?>
 @extends('layouts.app')
 
@@ -30,7 +32,7 @@
                     {!! Form::close() !!}
                 </div>
             @endcan
-            <a href="{{ route('projects.tasks.run', ['project' => $project, 'task' => $task]) }}"
+            <a href="{{ route('projects.tasks.edit', ['project' => $project, 'task' => $task]) }}"
                class="btn btn-success m-1">{{ __('projects/tasks.show.change') }}</a>
         </div>
     @endcan
@@ -69,6 +71,11 @@
             @can('projectTask.viewTime', $task)
                 <b-tab title="{{ __('projects/tasks.times.title') }}">
                     <h3 class="mt-2 mb-2">{{ __('projects/tasks.times.title') }}</h3>
+                    <ProjectTaskTimeList
+                        csrf="{{ csrf_token() }}"
+                        store_url="{{ route('projects.tasks.times.update', ['project' => $project, 'task' => $task, 'time' => 0]) }}"
+                        user_id="{{ Auth::id() }}"
+                        list='{!! $times->toJson() !!}'></ProjectTaskTimeList>
                 </b-tab>
             @endcan
         </b-tabs>

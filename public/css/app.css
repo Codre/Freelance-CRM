@@ -14229,3 +14229,37 @@ header .icon {
   }
 }
 
+.btn.btn-info.btn-animate {
+  transition: all 0.25s ease-in;
+  -webkit-animation: btn-animate-info 2s infinite ease;
+          animation: btn-animate-info 2s infinite ease;
+}
+
+@-webkit-keyframes btn-animate-info {
+  0% {
+    background-color: #6cb2eb;
+  }
+
+  50% {
+    background-color: #7fc0f5;
+  }
+
+  100% {
+    background-color: #6cb2eb;
+  }
+}
+
+@keyframes btn-animate-info {
+  0% {
+    background-color: #6cb2eb;
+  }
+
+  50% {
+    background-color: #7fc0f5;
+  }
+
+  100% {
+    background-color: #6cb2eb;
+  }
+}
+

@@ -43,6 +43,10 @@ class TaskTimes extends Model
 
     protected $fillable = ['task_id', 'user_id', 'started', 'total', 'ended', 'comment'];
 
+    protected $dates = [
+        'created_at', 'updated_at', 'stared', 'ended'
+    ];
+
     /**
      * Получить задачу к которой прикреплён файл
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

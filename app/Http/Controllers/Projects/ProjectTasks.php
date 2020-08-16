@@ -107,13 +107,21 @@ class ProjectTasks extends Controller
                 ->get()->first();
         }
 
+        $times = $task->times()->with(['user'])->orderBy('updated_at', 'desc')->get();
+
+        foreach ($times as &$item) {
+            $item->date = $item->updated_at->toDateTimeString();
+        }
+        unset($item);
+
         return view('projects.tasks.show')->with([
-            'title'   => $project->name . " - " . $task->title,
-            'project' => $project,
-            'comments' => $comments,
-            'task'    => $task,
+            'title'       => $project->name . " - " . $task->title,
+            'project'     => $project,
+            'comments'    => $comments,
+            'task'        => $task,
+            'times'       => $times,
             'timeStarted' => $timeStarted,
-            'back'    => route('projects.show', ['project' => $project]),
+            'back'        => route('projects.show', ['project' => $project]),
         ]);
     }
 
