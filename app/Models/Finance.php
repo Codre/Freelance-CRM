@@ -29,6 +29,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Finance withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Finance withoutTrashed()
  * @mixin \Eloquent
+ * @property string|null $comment
+ * @method static \Illuminate\Database\Eloquent\Builder|Finance whereComment($value)
  */
 class Finance extends Model
 {

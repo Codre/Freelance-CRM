@@ -36,6 +36,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProjectTask whereStatus($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TaskComment[] $comments
  * @property-read int|null $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TaskTimes[] $times
+ * @property-read int|null $times_count
  */
 class ProjectTask extends Model
 {

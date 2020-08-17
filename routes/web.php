@@ -17,14 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'Overview@index')->name('overview');
     Route::resources([
-        'staffs'   => 'Staffs\Staffs',
-        'clients'  => 'Clients\Clients'
+        'staffs'  => 'Staffs\Staffs',
+        'clients' => 'Clients\Clients',
     ]);
     Route::resource('projects.members', 'Projects\ProjectMembers')->except(['show']);
     Route::resource('projects.tasks', 'Projects\ProjectTasks')->except(['index']);
     Route::resource('projects', 'Projects\Projects')->except(['create']);
     Route::resource('projects.tasks.comments', 'Projects\TaskComment')->only(['store']);
     Route::resource('projects.tasks.times', 'Projects\TaskTimes')->only(['update']);
+
+    Route::resource('projects.finances', 'Projects\ProjectFinanceController')
+        ->except(['index', 'show', 'edit', 'destroy']);
+    Route::resource('projects.tasks.finances', 'Projects\ProjectFinanceController')
+        ->except(['index', 'show', 'edit']);
 
     Route::post('projects/{project}}/tasks/{task}/run', 'Projects\ProjectTasks@run')
         ->name('projects.tasks.run');

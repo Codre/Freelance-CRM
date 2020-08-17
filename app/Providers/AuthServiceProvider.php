@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Project;
 use App\Models\ProjectTask;
 use App\Policies\ClientPolicy;
+use App\Policies\ProjectFinancePolicy;
 use App\Policies\ProjectPolicy;
 use App\Policies\ProjectTaskPolicy;
 use App\Policies\StaffPolicy;
@@ -20,8 +21,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Project::class => ProjectPolicy::class,
-        ProjectTask::class => ProjectTaskPolicy::class
+        Project::class     => ProjectPolicy::class,
+        ProjectTask::class => ProjectTaskPolicy::class,
     ];
 
     /**
@@ -38,6 +39,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::resource('staff', StaffPolicy::class);
         Gate::resource('client', ClientPolicy::class);
         Gate::resource('project', ProjectPolicy::class);
+        Gate::resource('projectFinance', ProjectFinancePolicy::class);
+
         Gate::resource('projectTask', ProjectTaskPolicy::class);
         Gate::define('projectTask.run', ProjectTaskPolicy::class . '@run');
         Gate::define('projectTask.viewTime', ProjectTaskPolicy::class . '@viewTime');
