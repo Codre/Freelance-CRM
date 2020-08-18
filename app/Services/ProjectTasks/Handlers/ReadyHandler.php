@@ -2,20 +2,17 @@
 
 namespace App\Services\ProjectTasks\Handlers;
 
-use App\Jobs\Projects\TaskFinishing;
+use App\Jobs\Projects\TaskReady;
 use App\Jobs\Queue;
 use App\Models\ProjectTask;
-use App\Services\ProjectFinances\ProjectFinancesService;
 use App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface;
 
 /**
- * Class FinishedHandler
- *
- * Завершение тикета
+ * Class ReadyHandler
  *
  * @package App\Services\ProjectTasks\Handlers
  */
-class FinishingHandler
+class ReadyHandler
 {
     /**
      * @var ProjectTasksRepositoryInterface
@@ -38,8 +35,8 @@ class FinishingHandler
      */
     public function handle(ProjectTask $task)
     {
-        $this->projectTasksRepository->updateFromArray($task, ['status' => ProjectTask::STATUS_FINISHED]);
+        $this->projectTasksRepository->updateFromArray($task, ['status' => ProjectTask::STATUS_READY]);
 
-        TaskFinishing::dispatch($task, \Auth::user())->onQueue(Queue::LOW);
+        TaskReady::dispatch($task, \Auth::user())->onQueue(Queue::LOW);
     }
 }

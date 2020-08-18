@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\ProjectTask;
 use App\Services\ProjectTasks\Handlers\CreateTaskHandler;
 use App\Services\ProjectTasks\Handlers\FinishingHandler;
+use App\Services\ProjectTasks\Handlers\ReadyHandler;
 use App\Services\ProjectTasks\Handlers\UpdateTaskHandler;
 use App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface;
 
@@ -34,17 +35,23 @@ class ProjectTasksService
      * @var ProjectTasksRepositoryInterface
      */
     private $projectTasksRepository;
+    /**
+     * @var ReadyHandler
+     */
+    private $readyHandler;
 
     /**
      * ProjectTasksService constructor.
      *
      * @param FinishingHandler                $finishingHandler
+     * @param ReadyHandler                    $readyHandler
      * @param CreateTaskHandler               $createTaskHandler
      * @param UpdateTaskHandler               $updateTaskHandler
      * @param ProjectTasksRepositoryInterface $projectTasksRepository
      */
     public function __construct(
         FinishingHandler $finishingHandler,
+        ReadyHandler $readyHandler,
         CreateTaskHandler $createTaskHandler,
         UpdateTaskHandler $updateTaskHandler,
         ProjectTasksRepositoryInterface $projectTasksRepository
@@ -53,16 +60,27 @@ class ProjectTasksService
         $this->createTaskHandler = $createTaskHandler;
         $this->updateTaskHandler = $updateTaskHandler;
         $this->projectTasksRepository = $projectTasksRepository;
+        $this->readyHandler = $readyHandler;
+    }
+
+    /**
+     * Отправить тикет на проверку
+     *
+     * @param ProjectTask $task
+     */
+    public function ready(ProjectTask $task)
+    {
+        $this->readyHandler->handle($task);
     }
 
     /**
      * Завершить тикет
      *
-     * @param int $id
+     * @param ProjectTask $task
      */
-    public function finished(int $id)
+    public function finished(ProjectTask $task)
     {
-        $this->finishingHandler->handle($id);
+        $this->finishingHandler->handle($task);
     }
 
     /**

@@ -32,11 +32,41 @@
                     {!! Form::close() !!}
                 </div>
             @endcan
+            @can('projectTask.ready', $task)
+                <div class="d-inline-block">
+                    {!! Form::open([
+                        'route' => ['projects.tasks.ready', 'project' => $project, 'task' => $task],
+                         'method' => 'POST'
+                      ]) !!}
+                        <button v-b-tooltip.hover
+                                title="{{ __('projects/tasks.show.ready') }}"
+                                class="btn btn-primary m-1"
+                                type="submit">
+                            @materialicon('action', 'done', 'white')
+                        </button>
+                    {!! Form::close() !!}
+                </div>
+            @endcan
+            @can('projectTask.finishing', $task)
+                <div class="d-inline-block">
+                    {!! Form::open([
+                        'route' => ['projects.tasks.finishing', 'project' => $project, 'task' => $task],
+                         'method' => 'POST'
+                      ]) !!}
+                        <button v-b-tooltip.hover
+                                title="{{ __('projects/tasks.show.finishing') }}"
+                                class="btn btn-primary m-1"
+                                type="submit">
+                            @materialicon('action', 'done_all', 'white')
+                        </button>
+                    {!! Form::close() !!}
+                </div>
+            @endcan
             <a href="{{ route('projects.tasks.edit', ['project' => $project, 'task' => $task]) }}"
                class="btn btn-success m-1">{{ __('projects/tasks.show.change') }}</a>
         </div>
     @endcan
-    <h1>{{ $title }}</h1>
+    <h1>{{ $title }} <span class="badge badge-secondary" style="font-size: 14px">{{ $statuses[$task->status] }}</span></h1>
 
     <div class="card">
         <div class="card-body">

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Services\ProjectTasks\Exceptions\AllProjectUsersMethodNotFoundException;
 use App\Services\ProjectTasks\Handlers\SendCreatedEmail;
 use App\Services\ProjectTasks\Handlers\SendFinishedEmail;
+use App\Services\ProjectTasks\Handlers\SendReadyEmail;
 use App\Services\ProjectTasks\Handlers\SendUpdatedEmail;
 
 /**
@@ -30,22 +31,29 @@ class ProjectTasksEmailsService
      * @var SendCreatedEmail
      */
     private $sendCreatedEmail;
+    /**
+     * @var SendReadyEmail
+     */
+    private $sendReadyEmail;
 
     /**
      * ProjectTasksEmailsService constructor.
      *
      * @param SendFinishedEmail $sendFinishedEmail
+     * @param SendReadyEmail    $sendReadyEmail
      * @param SendUpdatedEmail  $sendUpdatedEmail
      * @param SendCreatedEmail  $sendCreatedEmail
      */
     public function __construct(
         SendFinishedEmail $sendFinishedEmail,
+        SendReadyEmail $sendReadyEmail,
         SendUpdatedEmail $sendUpdatedEmail,
         SendCreatedEmail $sendCreatedEmail
     ) {
         $this->sendFinishedEmail = $sendFinishedEmail;
         $this->sendUpdatedEmail = $sendUpdatedEmail;
         $this->sendCreatedEmail = $sendCreatedEmail;
+        $this->sendReadyEmail = $sendReadyEmail;
     }
 
     /**
@@ -66,6 +74,18 @@ class ProjectTasksEmailsService
         foreach ($projectTask->project->users()->whereNotIn('user_id', [$who->id])->get() as $user) {
             $this->{$method}($projectTask, $user, $who);
         }
+    }
+
+    /**
+     * Отправить e-mail о готовности тикета к проверке пользователю
+     *
+     * @param ProjectTask $projectTask
+     * @param User        $user
+     * @param User        $who
+     */
+    public function ready(ProjectTask $projectTask, User $user, User $who)
+    {
+        $this->sendReadyEmail->handle($projectTask, $user, $who);
     }
 
     /**

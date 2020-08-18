@@ -43,6 +43,8 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::resource('projectTask', ProjectTaskPolicy::class);
         Gate::define('projectTask.run', ProjectTaskPolicy::class . '@run');
+        Gate::define('projectTask.finishing', ProjectTaskPolicy::class . '@finishing');
+        Gate::define('projectTask.ready', ProjectTaskPolicy::class . '@ready');
         Gate::define('projectTask.viewTime', ProjectTaskPolicy::class . '@viewTime');
     }
 }

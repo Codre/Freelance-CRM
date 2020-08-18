@@ -135,6 +135,54 @@ class ProjectTaskPolicy
     }
 
     /**
+     * Возможность завершить задачу
+     *
+     * @param User        $user
+     * @param ProjectTask $projectTask
+     *
+     * @return bool
+     */
+    public function finishing(User $user, ProjectTask $projectTask)
+    {
+        if (!in_array($projectTask->status, [ProjectTask::STATUS_READY])) {
+            return false;
+        }
+
+        if (!in_array(
+            $projectTask->project->users->find($user->id)->pivot->group,
+            [ProjectUser::GROUP_MANAGER, ProjectUser::GROUP_CUSTOMER]
+        )) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Возможность отправить задачу на проверку
+     *
+     * @param User        $user
+     * @param ProjectTask $projectTask
+     *
+     * @return bool
+     */
+    public function ready(User $user, ProjectTask $projectTask)
+    {
+        if (!in_array($projectTask->status, [ProjectTask::STATUS_PAUSE, ProjectTask::STATUS_NEW])) {
+            return false;
+        }
+
+        if (!in_array(
+            $projectTask->project->users->find($user->id)->pivot->group,
+            [ProjectUser::GROUP_MANAGER, ProjectUser::GROUP_EXECUTOR]
+        )) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Может ли видеть затраченное время
      *
      * @param User        $user

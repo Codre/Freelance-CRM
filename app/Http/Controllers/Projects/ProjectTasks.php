@@ -41,8 +41,7 @@ class ProjectTasks extends Controller
     public function __construct(
         ProjectTasksService $projectTasksService,
         TaskTimesService $taskTimesService
-    )
-    {
+    ) {
         $this->projectTasksService = $projectTasksService;
         $this->taskTimesService = $taskTimesService;
     }
@@ -118,6 +117,7 @@ class ProjectTasks extends Controller
             'title'       => $project->name . " - " . $task->title,
             'project'     => $project,
             'comments'    => $comments,
+            'statuses'    => ProjectTask::getStatuses(),
             'task'        => $task,
             'times'       => $times,
             'timeStarted' => $timeStarted,
@@ -207,6 +207,46 @@ class ProjectTasks extends Controller
         } else {
             $this->taskTimesService->run($task);
         }
+
+        return redirect(route('projects.tasks.show', ['project' => $project, 'task' => $task]));
+    }
+
+    /**
+     * Процесс отправки задачи на проверку
+     *
+     * @param Request     $request
+     * @param Project     $project
+     * @param ProjectTask $task
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|Redirector
+     * @throws AuthorizationException
+     */
+    public function ready(Request $request, Project $project, ProjectTask $task)
+    {
+        $this->authorize('projectTask.update', $task);
+        $this->authorize('projectTask.ready', $task);
+
+        $this->projectTasksService->ready($task);
+
+        return redirect(route('projects.tasks.show', ['project' => $project, 'task' => $task]));
+    }
+
+    /**
+     * Процесс завершения задачи
+     *
+     * @param Request     $request
+     * @param Project     $project
+     * @param ProjectTask $task
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|Redirector
+     * @throws AuthorizationException
+     */
+    public function finishing(Request $request, Project $project, ProjectTask $task)
+    {
+        $this->authorize('projectTask.update', $task);
+        $this->authorize('projectTask.finishing', $task);
+
+        $this->projectTasksService->finished($task);
 
         return redirect(route('projects.tasks.show', ['project' => $project, 'task' => $task]));
     }
