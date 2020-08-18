@@ -20,6 +20,7 @@ class CreateProjectFinancesTable extends Migration
             $table->integer('task_id')->nullable()->unsigned()->index();
             $table->decimal('bet', 14);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

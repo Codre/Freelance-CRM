@@ -6,6 +6,8 @@ use App\Models\Project;
 use App\Models\User;
 use App\Observers\ProjectObserver;
 use App\Observers\UserObserver;
+use App\Services\ProjectFinances\Repositories\EloquentProjectFinancesRepository;
+use App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface;
 use App\Services\Projects\Repositories\EloquentProjectsRepository;
 use App\Services\Projects\Repositories\ProjectsRepositoryInterface;
 use App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository;
@@ -39,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ProjectTasksRepositoryInterface::class, EloquentProjectTasksRepository::class);
         $this->app->bind(TaskCommentsRepositoryInterface::class, EloquentTaskCommentsRepository::class);
         $this->app->bind(TaskTimesRepositoryInterface::class, EloquentTaskTimesRepository::class);
+        $this->app->bind(ProjectFinancesRepositoryInterface::class, EloquentProjectFinancesRepository::class);
     }
 
     /**

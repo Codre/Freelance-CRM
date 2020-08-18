@@ -16,6 +16,12 @@
         @endcan
     </td>
     <td>
+        @can('projectFinance.viewAny', $item)
+            <a href="{{ route('projects.finances.create', ['project' => $item]) }}" class="btn btn-secondary btn-sm"
+               v-b-tooltip.hover title="{{ __('projects/general.index.item.finances') }}">
+                @materialicon('editor', 'monetization_on', 'white')
+            </a>
+        @endcan
         @can('project.view', $item)
             <a href="{{ route('projects.members.index', ['project' => $item->id]) }}" class="btn btn-info btn-sm"
                v-b-tooltip.hover title="{{ __('projects/general.index.item.members') }}">

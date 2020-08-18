@@ -27,9 +27,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('projects.tasks.times', 'Projects\TaskTimes')->only(['update']);
 
     Route::resource('projects.finances', 'Projects\ProjectFinanceController')
-        ->except(['index', 'show', 'edit', 'destroy']);
+        ->only(['create', 'store']);
     Route::resource('projects.tasks.finances', 'Projects\ProjectFinanceController')
-        ->except(['index', 'show', 'edit']);
+        ->only(['create', 'store', 'destroy']);
 
     Route::post('projects/{project}}/tasks/{task}/run', 'Projects\ProjectTasks@run')
         ->name('projects.tasks.run');

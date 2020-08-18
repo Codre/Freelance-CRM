@@ -7,6 +7,12 @@
                 <a href="{{ route('projects.tasks.create', ['project' => $project['id']]) }}"
                    class="btn btn-success m-1">{{ __('projects/show.create_task') }}</a>
             @endcan
+            @can('projectFinance.viewAny', $project)
+                <a href="{{ route('projects.finances.create', ['project' => $project]) }}" class="btn btn-secondary btn-sm"
+                   v-b-tooltip.hover title="{{ __('projects/show.finances') }}">
+                    @materialicon('editor', 'monetization_on', 'white')
+                </a>
+            @endcan
             <a href="{{ route('projects.edit', ['project' => $project['id']]) }}"
                class="btn btn-primary m-1">{{ __('projects/show.change') }}</a>
         </div>

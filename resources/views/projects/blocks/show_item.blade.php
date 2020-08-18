@@ -30,6 +30,12 @@
         @todo
     </td>
     <td>
+        @can('projectFinance.viewAny', [$project, $item])
+            <a href="{{ route('projects.tasks.finances.create', ['project' => $project, 'task' => $item]) }}"
+               class="btn btn-secondary btn-sm" v-b-tooltip.hover title="{{ __('projects/show.item.finances') }}">
+                @materialicon('editor', 'monetization_on', 'white')
+            </a>
+        @endcan
         @can('projectTask.update', $item)
             <a href="{{ route('projects.tasks.edit', ['project' => $project, 'task' => $item]) }}" class="btn btn-primary btn-sm"
                v-b-tooltip.hover title="{{ __('projects/show.item.edit') }}">
