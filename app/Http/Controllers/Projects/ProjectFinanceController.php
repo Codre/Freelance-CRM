@@ -89,27 +89,4 @@ class ProjectFinanceController extends Controller
             return redirect(route('projects.show', ['project' => $project]));
         }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\ProjectFinance $projectFinance
-     * @param Project                    $project
-     * @param ProjectTask                $task
-     *
-     * @return void
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function destroy(ProjectFinance $projectFinance, Project $project, ProjectTask $task)
-    {
-        $this->authorize('projectFinance.delete', [$project, $task]);
-
-        $this->financesService->delete($projectFinance);
-
-        if ($task->id) {
-            return redirect(route('projects.tasks.show', ['project' => $project, 'task' => $task]));
-        } else {
-            return redirect(route('projects.show', ['project' => $project]));
-        }
-    }
 }

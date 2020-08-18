@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('projects.finances', 'Projects\ProjectFinanceController')
         ->only(['create', 'store']);
     Route::resource('projects.tasks.finances', 'Projects\ProjectFinanceController')
-        ->only(['create', 'store', 'destroy']);
+        ->only(['create', 'store']);
 
     Route::post('projects/{project}}/tasks/{task}/run', 'Projects\ProjectTasks@run')
         ->name('projects.tasks.run');
