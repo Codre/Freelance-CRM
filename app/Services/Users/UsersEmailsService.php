@@ -3,10 +3,10 @@
 
 namespace App\Services\Users;
 
-
 use App\Models\Group;
 use App\Models\User;
 use App\Services\Users\Handlers\SendBalanceEmail;
+use App\Services\Users\Handlers\SendResetPasswordEmail;
 use App\Services\Users\Repositories\UsersRepositoryInterface;
 
 /**
@@ -25,17 +25,26 @@ class UsersEmailsService
      * @var UsersRepositoryInterface
      */
     private $usersRepository;
+    /**
+     * @var SendResetPasswordEmail
+     */
+    private $sendResetPasswordEmail;
 
     /**
      * UsersEmailsService constructor.
      *
      * @param SendBalanceEmail         $sendBalanceEmail
      * @param UsersRepositoryInterface $usersRepository
+     * @param SendResetPasswordEmail   $sendResetPasswordEmail
      */
-    public function __construct(SendBalanceEmail $sendBalanceEmail, UsersRepositoryInterface $usersRepository)
-    {
+    public function __construct(
+        SendBalanceEmail $sendBalanceEmail,
+        UsersRepositoryInterface $usersRepository,
+        SendResetPasswordEmail $sendResetPasswordEmail
+    ) {
         $this->sendBalanceEmail = $sendBalanceEmail;
         $this->usersRepository = $usersRepository;
+        $this->sendResetPasswordEmail = $sendResetPasswordEmail;
     }
 
     /**
@@ -69,5 +78,16 @@ class UsersEmailsService
         foreach ($users->all() as $item) {
             $this->balance($item->id);
         }
+    }
+
+    /**
+     * Отправить ссылку на восстановление пароля
+     *
+     * @param User   $user
+     * @param string $token
+     */
+    public function resetPassword(User $user, string $token)
+    {
+        $this->sendResetPasswordEmail->handler($user, $token);
     }
 }

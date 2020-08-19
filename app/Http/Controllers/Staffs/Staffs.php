@@ -49,7 +49,8 @@ class Staffs extends Controller
         $this->authorize('staff.create');
 
         return view('staffs.create')->with([
-            'title' => __("staffs/create.title")
+            'title' => __("staffs/create.title"),
+            'back' => route('staffs.index')
         ]);
     }
 
@@ -112,7 +113,8 @@ class Staffs extends Controller
 
         return view('staffs.edit')->with([
             'staff' => $staff,
-            'title' => __("staffs/edit.title")
+            'title' => __("staffs/edit.title"),
+            'back' => $staff->id == \Auth::id() ? route('staffs.show', $staff) : route('staffs.index')
         ]);
     }
 
