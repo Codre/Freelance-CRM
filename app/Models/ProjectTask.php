@@ -67,6 +67,21 @@ class ProjectTask extends Model
     }
 
     /**
+     * Получить список типов цветов статусов
+     * @return array
+     */
+    public static function getColors()
+    {
+        return [
+            self::STATUS_NEW      => 'info',
+            self::STATUS_PROCESS  => 'primary',
+            self::STATUS_PAUSE    => 'warning',
+            self::STATUS_READY    => 'success',
+            self::STATUS_FINISHED => 'secondary',
+        ];
+    }
+
+    /**
      * Получить проект задачи
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

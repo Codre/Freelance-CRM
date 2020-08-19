@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProjectTask;
 use App\Services\Projects\ProjectsService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class Overview extends Controller
@@ -23,14 +23,21 @@ class Overview extends Controller
         $projects = $this->projectsService->searchProjects(10);
         $projects->load('tasks');
 
+        $tasks = ProjectTask::whereIn('status', [ProjectTask::STATUS_PROCESS, ProjectTask::STATUS_PAUSE, ProjectTask::STATUS_NEW])
+            ->whereIn('project_id', Auth::user()->projects()->get()->map->id)
+            ->orderBy('updated_at', 'desc');
+
+        $tasksCount = $tasks->count();
+
         return view('overview.index')->with([
-            'title'    => __('overview/general.title'),
-            'balance'  => Auth::user()->balance,
-            'projects' => $projects->items(),
-            'tasks'    => [
-                'today'    => 10,
-                'tomorrow' => 17,
-            ],
+            'title'      => __('overview/general.title'),
+            'balance'    => Auth::user()->balance,
+            // @todo ожидаемый доход
+            'projects'   => $projects->items(),
+            'tasks'      => $tasks->with(['project'])->limit(10)->get(),
+            'tasksCount' => $tasksCount,
+            'taskStatuses'   => ProjectTask::getStatuses(),
+            'taskStatusColors'   => ProjectTask::getColors(),
         ]);
     }
 }

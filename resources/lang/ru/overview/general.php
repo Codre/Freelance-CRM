@@ -7,9 +7,8 @@ return [
       'deposit' => 'Пополнить',
   ],
   'tasks' => [
-      'title' => 'Задачи',
-      'today' => 'Сегодня',
-      'tomorrow' => 'Завтра',
+      'title' => 'Задачи в работе',
+      'all' => 'Всего: <b>:count</b>',
   ],
   'projects' => [
       'title' => 'Проекты',

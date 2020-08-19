@@ -1,3 +1,8 @@
+<?php
+/** @var float $balance */
+/** @var int $tasksCount */
+/** @var \Illuminate\Database\Eloquent\Collection $tasks */
+?>
 @extends('layouts.app')
 
 @section('content')
@@ -7,28 +12,15 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h3>{{ __('overview/general.balance.title') }}</h3>
-                </div>
-                <div class="card-body">
-                    <h4 class="{{ $balance >= 0 ? 'text-success' : 'text-danger' }} text-center">
-                        @moneyFormat($balance)
-                    </h4>
-                </div>
-                <div class="card-footer">
-                    <p class="text-center">
-                        <a href="#" class="btn btn-success">{{ __('overview/general.balance.deposit') }}</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
+                    <div class="float-right mt-2 mr-1">
+                        {!! __('overview/general.tasks.all', ['count' => $tasksCount]) !!}
+                    </div>
                     <h3>{{ __('overview/general.tasks.title') }}</h3>
                 </div>
                 <div class="card-body">
-                    <p>{{ __('overview/general.tasks.today') }}: <b>{{ $tasks['today'] }}</b></p>
-                    <p>{{ __('overview/general.tasks.tomorrow') }}: <b>{{ $tasks['tomorrow'] }}</b></p>
+                    @foreach($tasks as $task)
+                        @include('overview.blocks.task_item')
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -40,23 +32,29 @@
                 <div class="card-body">
                     <div class="nav flex-column nav-pills">
                         @foreach($projects as $project)
-                            <a class="nav-link" href="#">
-                                <span class="float-right">
-                                    <span class="badge badge-info" data-toggle="tooltip" title="{{ __('overview/general.projects.hint.new') }}">
-                                        {{ count($project->tasks) }}
-                                    </span>
-                                    <span class="badge badge-success" data-toggle="tooltip" title="{{ __('overview/general.projects.hint.process') }}">
-                                        0
-                                    </span>
-                                    <span class="badge badge-secondary" data-toggle="tooltip" title="{{ __('overview/general.projects.hint.ended') }}">
-                                        0
-                                    </span>
-                                </span>
-                                {{ $project->name }}
-                            </a>
+                            @include('overview.blocks.project_item')
                         @endforeach
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ __('overview/general.balance.title') }}</h3>
+                </div>
+                <div class="card-body">
+                    <h4 class="{{ $balance >= 0 ? 'text-success' : 'text-danger' }} text-center">
+                        @moneyFormat($balance)
+                    </h4>
+                </div>
+                @can('user.pay')
+                <div class="card-footer">
+                    <p class="text-center">
+                        <a href="#" class="btn btn-success">{{ __('overview/general.balance.deposit') }}</a>
+                    </p>
+                </div>
+                @endcan
             </div>
         </div>
     </div>

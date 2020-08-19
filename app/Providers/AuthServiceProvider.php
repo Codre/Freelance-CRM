@@ -9,6 +9,7 @@ use App\Policies\ProjectFinancePolicy;
 use App\Policies\ProjectPolicy;
 use App\Policies\ProjectTaskPolicy;
 use App\Policies\StaffPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
@@ -46,5 +47,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('projectTask.finishing', ProjectTaskPolicy::class . '@finishing');
         Gate::define('projectTask.ready', ProjectTaskPolicy::class . '@ready');
         Gate::define('projectTask.viewTime', ProjectTaskPolicy::class . '@viewTime');
+
+        Gate::define('user.pay', UserPolicy::class . '@pay');
     }
 }
