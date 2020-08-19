@@ -19,8 +19,9 @@ class ShareCommon
      */
     public function handle($request, Closure $next)
     {
+        $currentPage = current(explode('/', $request->path()));
         view()->share([
-            'currentPage' => $request->path() == '/' ? 'overview' : $request->path(),
+            'currentPage' => $currentPage ?: 'overview',
             'currentUrl' => $request->getRequestUri(),
             'locales' => LocaleData::LOCALES,
             'currentLocale' => App::getLocale(),
