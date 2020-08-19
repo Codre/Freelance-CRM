@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Group;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -27,6 +29,7 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email,'.$this->id.'|max:100',
             'password' => $this->password ? 'min:6|confirmed' : '',
+            'group_id' => ['required', Rule::in(Group::STAFFS)]
         ];
     }
 
@@ -52,6 +55,7 @@ class UpdateUserRequest extends FormRequest
             'name' => __('attributes/user.name'),
             'email' => __('attributes/user.email'),
             'password' => __('attributes/user.password'),
+            'group_id' => __('attributes/user.group_id'),
         ];
     }
 }

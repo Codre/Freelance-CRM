@@ -3,5 +3,6 @@
 return [
     'name' => 'Имя',
     'email' => 'E-mail',
-    'password' => 'Пароль'
+    'password' => 'Пароль',
+    'group_id' => 'Группа'
 ];

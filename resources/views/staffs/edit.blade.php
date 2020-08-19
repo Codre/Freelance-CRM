@@ -15,8 +15,8 @@
                 {!! Form::email('email', $staff->email, ['class' => 'form-control', 'placeholder' => __('staffs/edit.form.email.placeholder')]) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('password_old', __('staffs/edit.form.password.old.label')) !!}
-                {!! Form::password('password', ['class' => 'form-control', 'placeholder' => __('staffs/edit.form.password.old.placeholder')]) !!}
+                {!! Form::label('group_id', __('staffs/edit.form.group.label')) !!}
+                {!! Form::select('group_id', $groups, $staff->group_id, ['class' => 'form-control', 'placeholder' => __('staffs/edit.form.group.placeholder')]) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('password', __('staffs/edit.form.password.label')) !!}

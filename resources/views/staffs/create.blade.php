@@ -15,6 +15,10 @@
                 {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => __('staffs/create.form.email.placeholder')]) !!}
             </div>
             <div class="form-group">
+                {!! Form::label('group_id', __('staffs/create.form.group.label')) !!}
+                {!! Form::select('group_id', $groups, null, ['class' => 'form-control', 'placeholder' => __('staffs/create.form.group.placeholder')]) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('password', __('staffs/create.form.password.label')) !!}
                 {!! Form::password('password', ['class' => 'form-control', 'placeholder' => __('staffs/create.form.password.placeholder')]) !!}
             </div>

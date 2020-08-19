@@ -11,6 +11,10 @@ return [
           'label' => 'E-mail',
           'placeholder' => 'Введите e-mail',
       ],
+      'group' => [
+          'label' => 'Группа',
+          'placeholder' => 'Выберите группу',
+      ],
       'password' => [
           'label' => 'Новый пароль',
           'placeholder' =>  'Введите новый пароль',

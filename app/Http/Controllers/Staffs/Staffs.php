@@ -48,9 +48,13 @@ class Staffs extends Controller
     {
         $this->authorize('staff.create');
 
+        $groups = Group::whereIn('id', Group::STAFFS)->get();
+        $groups = array_column($groups->toArray(), 'name', 'id');
+
         return view('staffs.create')->with([
             'title' => __("staffs/create.title"),
-            'back' => route('staffs.index')
+            'back' => route('staffs.index'),
+            'groups' => $groups,
         ]);
     }
 
@@ -64,11 +68,7 @@ class Staffs extends Controller
     {
         $this->authorize('staff.create');
 
-        $data = array_merge(
-            $request->getFormData(),
-           ['group_id' => Group::STAFFS[rand(0,2)]] // @todo
-        );
-        $this->usersService->storeUser($data);
+        $this->usersService->storeUser($request->getFormData());
 
         return redirect(route('staffs.index'));
     }
@@ -111,10 +111,14 @@ class Staffs extends Controller
 
         $this->authorize('staff.update', [$staff]);
 
+        $groups = Group::whereIn('id', Group::STAFFS)->get();
+        $groups = array_column($groups->toArray(), 'name', 'id');
+
         return view('staffs.edit')->with([
             'staff' => $staff,
             'title' => __("staffs/edit.title"),
-            'back' => $staff->id == \Auth::id() ? route('staffs.show', $staff) : route('staffs.index')
+            'back' => $staff->id == \Auth::id() ? route('staffs.show', $staff) : route('staffs.index'),
+            'groups' => $groups
         ]);
     }
 
