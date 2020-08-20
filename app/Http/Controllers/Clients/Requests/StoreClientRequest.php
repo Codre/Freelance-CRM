@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Clients\Requests;
 use App\Http\Requests\FormRequest;
 use Illuminate\Support\Facades\Hash;
 
-class StoreInviteUserRequest extends FormRequest
+class StoreClientRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,8 +15,8 @@ class StoreInviteUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'min:6|confirmed',
-
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users,email|max:100',
         ];
     }
 
@@ -26,7 +26,9 @@ class StoreInviteUserRequest extends FormRequest
     public function getFormData()
     {
         $data = parent::getFormData();
+        $data['name'] = ucfirst($data['name']);
         $data['password'] = Hash::make(app(\Faker\Generator::class)->password);
+        $data['balance'] = 0;
 
         return $data;
     }
@@ -39,7 +41,8 @@ class StoreInviteUserRequest extends FormRequest
     public function attributes()
     {
         return [
-            'password' => __('attributes/user.password'),
+            'name' => __('attributes/user.name'),
+            'email' => __('attributes/user.email'),
         ];
     }
 }

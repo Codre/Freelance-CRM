@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Clients;
 
-use App\Http\Controllers\Clients\Requests\StoreInviteUserRequest;
+use App\Http\Controllers\Clients\Requests\StoreClientRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateClientRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Group;
 use App\Services\Users\DTO\User as UserDTO;
@@ -62,7 +63,7 @@ class Clients extends Controller
      * @param StoreUserRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(StoreInviteUserRequest $request)
+    public function store(StoreClientRequest $request)
     {
         $this->authorize('client.create');
 
@@ -133,7 +134,7 @@ class Clients extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateClientRequest $request, $id)
     {
         $client = $this->usersService->findUser($id);
 
