@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Clients\Requests;
 
 use App\Http\Requests\FormRequest;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class StoreInviteUserRequest extends FormRequest
 {
@@ -15,15 +15,36 @@ class StoreInviteUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required|min:6|confirmed',
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users,email|max:100',
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getFormData()
     {
+        $data = parent::getFormData();
+        $data['name'] = ucfirst($data['name']);
+        $data['password'] = Hash::make(app(\Faker\Generator::class)->password);
+        $data['balance'] = 0;
+
+        return $data;
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
         return [
-            'password' => $this->request->get('password'),
-            'email_verified_at' => Carbon::now()
+            'name' => __('attributes/user.name'),
+            'email' => __('attributes/user.email'),
+            'password' => __('attributes/user.password'),
+            'group_id' => __('attributes/user.group_id'),
         ];
     }
 }

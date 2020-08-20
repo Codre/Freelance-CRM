@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Clients;
 
+use App\Http\Controllers\Clients\Requests\StoreInviteUserRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -61,7 +62,7 @@ class Clients extends Controller
      * @param StoreUserRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreInviteUserRequest $request)
     {
         $this->authorize('client.create');
 

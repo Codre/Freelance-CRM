@@ -35,7 +35,7 @@ class StoreUserRequest extends UpdateUserRequest
 
         $data['created_at'] = Carbon::create()->subDay();
         $data['balance'] = 0;
-        $data['password'] = Hash::make(app(\Faker\Generator::class)->password);
+        $data['password'] = Hash::make($data['password']);
 
         return $data;
     }
