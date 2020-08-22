@@ -17,6 +17,7 @@
                 <tr>
                     <th class="text-center">{{__('projects/general.index.list.id')}}</th>
                     <th>{{__('projects/general.index.list.name')}}</th>
+                    <th class="text-center">{{__('projects/general.index.list.members')}}</th>
                     <th></th>
                 </tr>
                 </thead>

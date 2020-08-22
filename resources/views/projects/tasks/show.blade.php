@@ -1,7 +1,9 @@
 <?php
 /** @var \App\Models\TaskTimes $timeStarted */
 /** @var \App\Models\ProjectTask $task */
+/** @var \App\Models\Project $project */
 /** @var \Illuminate\Database\Eloquent\Collection $times */
+/** @var \Illuminate\Database\Eloquent\Collection $files */
 ?>
 @extends('layouts.app')
 
@@ -98,6 +100,12 @@
                     @include('projects.tasks.blocks.comment')
                 @endforeach
             </b-tab>
+            @can('taskFile.viewAny', $project)
+                <b-tab title="{{ __('projects/tasks.files.title') }}">
+                    <h3 class="mt-2 mb-2">{{ __('projects/tasks.files.title') }}</h3>
+                    @include('projects.tasks.blocks.files')
+                </b-tab>
+            @endcan
             @can('projectTask.viewTime', $task)
                 <b-tab title="{{ __('projects/tasks.times.title') }}">
                     <h3 class="mt-2 mb-2">{{ __('projects/tasks.times.title') }}</h3>

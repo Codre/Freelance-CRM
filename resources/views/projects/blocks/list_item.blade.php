@@ -15,18 +15,20 @@
             <b>{{ $item->name }}</b>
         @endcan
     </td>
-    <td>
-        @can('projectFinance.viewAny', $item)
-            <a href="{{ route('projects.finances.create', ['project' => $item]) }}" class="btn btn-secondary btn-sm"
-               v-b-tooltip.hover title="{{ __('projects/general.index.item.finances') }}">
-                @materialicon('editor', 'monetization_on', 'white')
-            </a>
-        @endcan
+    <td class="text-center">
         @can('project.view', $item)
             <a href="{{ route('projects.members.index', ['project' => $item->id]) }}" class="btn btn-info btn-sm"
                v-b-tooltip.hover title="{{ __('projects/general.index.item.members') }}">
                 @materialicon('action', 'supervisor_account', 'white')
                 <span class="badge">{{ $item->users->count()  }}</span>
+            </a>
+        @endcan
+    </td>
+    <td>
+        @can('projectFinance.viewAny', $item)
+            <a href="{{ route('projects.finances.create', ['project' => $item]) }}" class="btn btn-secondary btn-sm"
+               v-b-tooltip.hover title="{{ __('projects/general.index.item.finances') }}">
+                @materialicon('editor', 'monetization_on', 'white')
             </a>
         @endcan
         @can('project.update', $item)

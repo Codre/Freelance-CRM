@@ -79,7 +79,7 @@ class ProjectTasks extends Controller
     {
         $this->authorize('projectTask.create', $project);
 
-        $task = $this->projectTasksService->create($project, $request->getFormData());
+        $task = $this->projectTasksService->create($project, $request->getFormData(), $request->file('files'));
 
         return redirect(route('projects.tasks.show', ['project' => $project, 'task' => $task]));
     }
@@ -98,6 +98,7 @@ class ProjectTasks extends Controller
         $this->authorize('projectTask.view', $task);
 
         $comments = $task->comments()->orderBy('created_at', 'desc')->with(['user'])->get();
+        $files = $task->files()->orderBy('updated_at', 'desc')->with(['user'])->get();
 
         $timeStarted = false;
         if (Gate::allows('projectTask.update', $task) && Gate::allows('projectTask.run', $task)) {
@@ -119,6 +120,7 @@ class ProjectTasks extends Controller
             'comments'    => $comments,
             'statuses'    => ProjectTask::getStatuses(),
             'task'        => $task,
+            'files'       => $files,
             'times'       => $times,
             'timeStarted' => $timeStarted,
             'back'        => route('projects.show', ['project' => $project]),

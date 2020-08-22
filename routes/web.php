@@ -25,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('projects', 'Projects\Projects')->except(['create']);
     Route::resource('projects.tasks.comments', 'Projects\TaskComment')->only(['store']);
     Route::resource('projects.tasks.times', 'Projects\TaskTimes')->only(['update']);
+    Route::resource('projects.tasks.files', 'Projects\TaskFiles')->only(['show', 'store', 'destroy']);
 
     Route::resource('projects.finances', 'Projects\ProjectFinanceController')
         ->only(['create', 'store']);

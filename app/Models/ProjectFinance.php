@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|ProjectFinance onlyTrashed()
  * @method static \Illuminate\Database\Query\Builder|ProjectFinance withTrashed()
  * @method static \Illuminate\Database\Query\Builder|ProjectFinance withoutTrashed()
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectFinance whereDeletedAt($value)
  */
 class ProjectFinance extends Model
 {

@@ -87,11 +87,13 @@ class ProjectTasksService
      * @param Project $project
      * @param array   $data
      *
+     * @param array   $files
+     *
      * @return ProjectTask
      */
-    public function create(Project $project, array $data): ProjectTask
+    public function create(Project $project, array $data, array $files = []): ProjectTask
     {
-        return $this->createTaskHandler->handle($project, $data);
+        return $this->createTaskHandler->handle($project, $data, $files);
     }
 
     /**

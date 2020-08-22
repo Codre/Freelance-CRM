@@ -36,6 +36,15 @@ class TaskFile extends Model
 {
     use SoftDeletes;
 
+    /** @var string директория хранения файлов */
+    const FILE_PATH = 'tasks/';
+
+    protected $fillable = ['task_id', 'user_id', 'file'];
+
+    protected $dates = [
+        'created_at', 'updated_at'
+    ];
+
     /**
      * Получить задачу к которой прикреплён файл
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

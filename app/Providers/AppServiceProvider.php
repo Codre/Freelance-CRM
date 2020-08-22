@@ -16,6 +16,8 @@ use App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository;
 use App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface;
 use App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository;
 use App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface;
+use App\Services\TaskFiles\Repositories\EloquentTaskFilesRepository;
+use App\Services\TaskFiles\Repositories\TaskFilesRepositoryInterface;
 use App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository;
 use App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface;
 use App\Services\Users\Repositories\EloquentUsersRepository;
@@ -45,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TaskTimesRepositoryInterface::class, EloquentTaskTimesRepository::class);
         $this->app->bind(ProjectFinancesRepositoryInterface::class, EloquentProjectFinancesRepository::class);
         $this->app->bind(FinancesRepositoryInterface::class, EloquentFinancesRepository::class);
+        $this->app->bind(TaskFilesRepositoryInterface::class, EloquentTaskFilesRepository::class);
     }
 
     /**

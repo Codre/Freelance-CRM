@@ -9,6 +9,7 @@ use App\Policies\ProjectFinancePolicy;
 use App\Policies\ProjectPolicy;
 use App\Policies\ProjectTaskPolicy;
 use App\Policies\StaffPolicy;
+use App\Policies\TaskFilePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -41,6 +42,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::resource('client', ClientPolicy::class);
         Gate::resource('project', ProjectPolicy::class);
         Gate::resource('projectFinance', ProjectFinancePolicy::class);
+        Gate::resource('taskFile', TaskFilePolicy::class);
 
         Gate::resource('projectTask', ProjectTaskPolicy::class);
         Gate::define('projectTask.run', ProjectTaskPolicy::class . '@run');

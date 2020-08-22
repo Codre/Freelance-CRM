@@ -38,6 +38,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $comments_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TaskTimes[] $times
  * @property-read int|null $times_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TaskFile[] $files
+ * @property-read int|null $files_count
  */
 class ProjectTask extends Model
 {
@@ -115,5 +117,14 @@ class ProjectTask extends Model
     public function times()
     {
         return $this->hasMany(TaskTimes::class, 'task_id');
+    }
+
+    /**
+     * Получить файлы
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function files()
+    {
+        return $this->hasMany(TaskFile::class, 'task_id');
     }
 }

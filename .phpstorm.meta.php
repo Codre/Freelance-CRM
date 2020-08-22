@@ -11,9 +11,12 @@ namespace PHPSTORM_META {
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
+            'App\Services\Finances\Repositories\FinancesRepositoryInterface' => \App\Services\Finances\Repositories\EloquentFinancesRepository::class,
+            'App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface' => \App\Services\ProjectFinances\Repositories\EloquentProjectFinancesRepository::class,
             'App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface' => \App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository::class,
             'App\Services\Projects\Repositories\ProjectsRepositoryInterface' => \App\Services\Projects\Repositories\EloquentProjectsRepository::class,
             'App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface' => \App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository::class,
+            'App\Services\TaskFiles\Repositories\TaskFilesRepositoryInterface' => \App\Services\TaskFiles\Repositories\EloquentTaskFilesRepository::class,
             'App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface' => \App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository::class,
             'App\Services\Users\Repositories\UsersRepositoryInterface' => \App\Services\Users\Repositories\EloquentUsersRepository::class,
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
@@ -193,9 +196,12 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
+            'App\Services\Finances\Repositories\FinancesRepositoryInterface' => \App\Services\Finances\Repositories\EloquentFinancesRepository::class,
+            'App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface' => \App\Services\ProjectFinances\Repositories\EloquentProjectFinancesRepository::class,
             'App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface' => \App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository::class,
             'App\Services\Projects\Repositories\ProjectsRepositoryInterface' => \App\Services\Projects\Repositories\EloquentProjectsRepository::class,
             'App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface' => \App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository::class,
+            'App\Services\TaskFiles\Repositories\TaskFilesRepositoryInterface' => \App\Services\TaskFiles\Repositories\EloquentTaskFilesRepository::class,
             'App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface' => \App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository::class,
             'App\Services\Users\Repositories\UsersRepositoryInterface' => \App\Services\Users\Repositories\EloquentUsersRepository::class,
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
@@ -375,9 +381,12 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::get(0), map([
         '' => '@',
+            'App\Services\Finances\Repositories\FinancesRepositoryInterface' => \App\Services\Finances\Repositories\EloquentFinancesRepository::class,
+            'App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface' => \App\Services\ProjectFinances\Repositories\EloquentProjectFinancesRepository::class,
             'App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface' => \App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository::class,
             'App\Services\Projects\Repositories\ProjectsRepositoryInterface' => \App\Services\Projects\Repositories\EloquentProjectsRepository::class,
             'App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface' => \App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository::class,
+            'App\Services\TaskFiles\Repositories\TaskFilesRepositoryInterface' => \App\Services\TaskFiles\Repositories\EloquentTaskFilesRepository::class,
             'App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface' => \App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository::class,
             'App\Services\Users\Repositories\UsersRepositoryInterface' => \App\Services\Users\Repositories\EloquentUsersRepository::class,
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
@@ -557,9 +566,12 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
+            'App\Services\Finances\Repositories\FinancesRepositoryInterface' => \App\Services\Finances\Repositories\EloquentFinancesRepository::class,
+            'App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface' => \App\Services\ProjectFinances\Repositories\EloquentProjectFinancesRepository::class,
             'App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface' => \App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository::class,
             'App\Services\Projects\Repositories\ProjectsRepositoryInterface' => \App\Services\Projects\Repositories\EloquentProjectsRepository::class,
             'App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface' => \App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository::class,
+            'App\Services\TaskFiles\Repositories\TaskFilesRepositoryInterface' => \App\Services\TaskFiles\Repositories\EloquentTaskFilesRepository::class,
             'App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface' => \App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository::class,
             'App\Services\Users\Repositories\UsersRepositoryInterface' => \App\Services\Users\Repositories\EloquentUsersRepository::class,
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
@@ -739,9 +751,12 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
+            'App\Services\Finances\Repositories\FinancesRepositoryInterface' => \App\Services\Finances\Repositories\EloquentFinancesRepository::class,
+            'App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface' => \App\Services\ProjectFinances\Repositories\EloquentProjectFinancesRepository::class,
             'App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface' => \App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository::class,
             'App\Services\Projects\Repositories\ProjectsRepositoryInterface' => \App\Services\Projects\Repositories\EloquentProjectsRepository::class,
             'App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface' => \App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository::class,
+            'App\Services\TaskFiles\Repositories\TaskFilesRepositoryInterface' => \App\Services\TaskFiles\Repositories\EloquentTaskFilesRepository::class,
             'App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface' => \App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository::class,
             'App\Services\Users\Repositories\UsersRepositoryInterface' => \App\Services\Users\Repositories\EloquentUsersRepository::class,
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
@@ -921,9 +936,12 @@ namespace PHPSTORM_META {
         ]));
     override(\App::get(0), map([
         '' => '@',
+            'App\Services\Finances\Repositories\FinancesRepositoryInterface' => \App\Services\Finances\Repositories\EloquentFinancesRepository::class,
+            'App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface' => \App\Services\ProjectFinances\Repositories\EloquentProjectFinancesRepository::class,
             'App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface' => \App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository::class,
             'App\Services\Projects\Repositories\ProjectsRepositoryInterface' => \App\Services\Projects\Repositories\EloquentProjectsRepository::class,
             'App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface' => \App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository::class,
+            'App\Services\TaskFiles\Repositories\TaskFilesRepositoryInterface' => \App\Services\TaskFiles\Repositories\EloquentTaskFilesRepository::class,
             'App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface' => \App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository::class,
             'App\Services\Users\Repositories\UsersRepositoryInterface' => \App\Services\Users\Repositories\EloquentUsersRepository::class,
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
@@ -1103,9 +1121,12 @@ namespace PHPSTORM_META {
         ]));
     override(\App::make(0), map([
         '' => '@',
+            'App\Services\Finances\Repositories\FinancesRepositoryInterface' => \App\Services\Finances\Repositories\EloquentFinancesRepository::class,
+            'App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface' => \App\Services\ProjectFinances\Repositories\EloquentProjectFinancesRepository::class,
             'App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface' => \App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository::class,
             'App\Services\Projects\Repositories\ProjectsRepositoryInterface' => \App\Services\Projects\Repositories\EloquentProjectsRepository::class,
             'App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface' => \App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository::class,
+            'App\Services\TaskFiles\Repositories\TaskFilesRepositoryInterface' => \App\Services\TaskFiles\Repositories\EloquentTaskFilesRepository::class,
             'App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface' => \App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository::class,
             'App\Services\Users\Repositories\UsersRepositoryInterface' => \App\Services\Users\Repositories\EloquentUsersRepository::class,
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
@@ -1285,9 +1306,12 @@ namespace PHPSTORM_META {
         ]));
     override(\App::makeWith(0), map([
         '' => '@',
+            'App\Services\Finances\Repositories\FinancesRepositoryInterface' => \App\Services\Finances\Repositories\EloquentFinancesRepository::class,
+            'App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface' => \App\Services\ProjectFinances\Repositories\EloquentProjectFinancesRepository::class,
             'App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface' => \App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository::class,
             'App\Services\Projects\Repositories\ProjectsRepositoryInterface' => \App\Services\Projects\Repositories\EloquentProjectsRepository::class,
             'App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface' => \App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository::class,
+            'App\Services\TaskFiles\Repositories\TaskFilesRepositoryInterface' => \App\Services\TaskFiles\Repositories\EloquentTaskFilesRepository::class,
             'App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface' => \App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository::class,
             'App\Services\Users\Repositories\UsersRepositoryInterface' => \App\Services\Users\Repositories\EloquentUsersRepository::class,
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
@@ -1467,9 +1491,12 @@ namespace PHPSTORM_META {
         ]));
     override(\app(0), map([
         '' => '@',
+            'App\Services\Finances\Repositories\FinancesRepositoryInterface' => \App\Services\Finances\Repositories\EloquentFinancesRepository::class,
+            'App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface' => \App\Services\ProjectFinances\Repositories\EloquentProjectFinancesRepository::class,
             'App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface' => \App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository::class,
             'App\Services\Projects\Repositories\ProjectsRepositoryInterface' => \App\Services\Projects\Repositories\EloquentProjectsRepository::class,
             'App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface' => \App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository::class,
+            'App\Services\TaskFiles\Repositories\TaskFilesRepositoryInterface' => \App\Services\TaskFiles\Repositories\EloquentTaskFilesRepository::class,
             'App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface' => \App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository::class,
             'App\Services\Users\Repositories\UsersRepositoryInterface' => \App\Services\Users\Repositories\EloquentUsersRepository::class,
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
@@ -1649,9 +1676,12 @@ namespace PHPSTORM_META {
         ]));
     override(\resolve(0), map([
         '' => '@',
+            'App\Services\Finances\Repositories\FinancesRepositoryInterface' => \App\Services\Finances\Repositories\EloquentFinancesRepository::class,
+            'App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface' => \App\Services\ProjectFinances\Repositories\EloquentProjectFinancesRepository::class,
             'App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface' => \App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository::class,
             'App\Services\Projects\Repositories\ProjectsRepositoryInterface' => \App\Services\Projects\Repositories\EloquentProjectsRepository::class,
             'App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface' => \App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository::class,
+            'App\Services\TaskFiles\Repositories\TaskFilesRepositoryInterface' => \App\Services\TaskFiles\Repositories\EloquentTaskFilesRepository::class,
             'App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface' => \App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository::class,
             'App\Services\Users\Repositories\UsersRepositoryInterface' => \App\Services\Users\Repositories\EloquentUsersRepository::class,
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
@@ -1831,9 +1861,12 @@ namespace PHPSTORM_META {
         ]));
     override(\Psr\Container\ContainerInterface::get, map([
         '' => '@',
+            'App\Services\Finances\Repositories\FinancesRepositoryInterface' => \App\Services\Finances\Repositories\EloquentFinancesRepository::class,
+            'App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface' => \App\Services\ProjectFinances\Repositories\EloquentProjectFinancesRepository::class,
             'App\Services\ProjectTasks\Repositories\ProjectTasksRepositoryInterface' => \App\Services\ProjectTasks\Repositories\EloquentProjectTasksRepository::class,
             'App\Services\Projects\Repositories\ProjectsRepositoryInterface' => \App\Services\Projects\Repositories\EloquentProjectsRepository::class,
             'App\Services\TaskComments\Repositories\TaskCommentsRepositoryInterface' => \App\Services\TaskComments\Repositories\EloquentTaskCommentsRepository::class,
+            'App\Services\TaskFiles\Repositories\TaskFilesRepositoryInterface' => \App\Services\TaskFiles\Repositories\EloquentTaskFilesRepository::class,
             'App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface' => \App\Services\TaskTimes\Repositories\EloquentTaskTimesRepository::class,
             'App\Services\Users\Repositories\UsersRepositoryInterface' => \App\Services\Users\Repositories\EloquentUsersRepository::class,
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
