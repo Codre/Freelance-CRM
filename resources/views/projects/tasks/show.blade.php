@@ -103,6 +103,9 @@
             @can('taskFile.viewAny', $project)
                 <b-tab title="{{ __('projects/tasks.files.title') }}">
                     <h3 class="mt-2 mb-2">{{ __('projects/tasks.files.title') }}</h3>
+                    <DropzoneUpload
+                        action="{{ route('projects.tasks.files.store', ['project' => $project, 'task' => $task])}}"
+                    ></DropzoneUpload>
                     @include('projects.tasks.blocks.files')
                 </b-tab>
             @endcan

@@ -31,14 +31,22 @@ class TaskFiles extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
+     * @param Project                  $project
+     * @param ProjectTask              $task
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(Request $request, Project $project, ProjectTask $task)
     {
         $this->authorize('taskFile.create', $project);
 
-        // @todo save
+        $file = $this->service->uploadFile($request->file('file'), $task->id);
+
+        return response()->json([
+           'status' => true,
+           'data' => $file->toArray()
+        ]);
     }
 
     /**

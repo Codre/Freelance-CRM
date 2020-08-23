@@ -29,6 +29,7 @@
         "bootstrap-vue": "^2.16.0",
         "nl2br": "0.0.3",
         "summernote": "^0.8.18",
-        "vue-i18n": "^8.20.0"
+        "vue-i18n": "^8.20.0",
+        "vue2-dropzone": "^3.6.0"
     }
 }

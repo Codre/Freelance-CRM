@@ -17,7 +17,7 @@
                 <td>
                     <a href="{{ route('projects.tasks.files.show', ['project' => $project, 'task' => $task, 'file' => $file]) }}"
                        v-b-tooltip title="{{ __('projects/tasks.files.item.download') }}"
-                       target="_blank">{{ $file->file }}</a>
+                       target="_blank">{{ str_replace($task->id . '/', '', $file->file) }}</a>
                 </td>
                 <td class="text-center">
                     {{ $file->user->name }}
