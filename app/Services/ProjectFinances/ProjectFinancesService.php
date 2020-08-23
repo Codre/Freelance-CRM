@@ -3,8 +3,8 @@
 namespace App\Services\ProjectFinances;
 
 use App\Models\Project;
-use App\Models\ProjectFinance;
 use App\Models\ProjectTask;
+use App\Services\ProjectFinances\Handlers\CalcFinanceByTaskIds;
 use App\Services\ProjectFinances\Handlers\PayByTask;
 use App\Services\ProjectFinances\Handlers\SaveHandler;
 use App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface;
@@ -29,6 +29,10 @@ class ProjectFinancesService
      * @var PayByTask
      */
     private $payByTask;
+    /**
+     * @var CalcFinanceByTaskIds
+     */
+    private $calcFinanceByTaskIds;
 
     /**
      * ProjectFinancesService constructor.
@@ -36,15 +40,18 @@ class ProjectFinancesService
      * @param ProjectFinancesRepositoryInterface $repository
      * @param SaveHandler                        $saveHandler
      * @param PayByTask                          $payByTask
+     * @param CalcFinanceByTaskIds               $calcFinanceByTaskIds
      */
     public function __construct(
         ProjectFinancesRepositoryInterface $repository,
         SaveHandler $saveHandler,
-        PayByTask $payByTask
+        PayByTask $payByTask,
+        CalcFinanceByTaskIds $calcFinanceByTaskIds
     ) {
         $this->repository = $repository;
         $this->saveHandler = $saveHandler;
         $this->payByTask = $payByTask;
+        $this->calcFinanceByTaskIds = $calcFinanceByTaskIds;
     }
 
     /**
@@ -80,5 +87,18 @@ class ProjectFinancesService
     public function payByTask(ProjectTask $task)
     {
         $this->payByTask->handle($task);
+    }
+
+    /**
+     * Получить финансы для текущего пользователя по списку задач
+     *
+     * @param Project $project
+     * @param array   $taskIds
+     *
+     * @return array
+     */
+    public function calcFinanceByTaskIdsForCurrentUser(Project $project, array $taskIds): array
+    {
+        return $this->calcFinanceByTaskIds->handle($project, $taskIds);
     }
 }

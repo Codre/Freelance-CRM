@@ -28,7 +28,9 @@
                     <th class="text-center">{{__('projects/show.table.id')}}</th>
                     <th>{{__('projects/show.table.name')}}</th>
                     <th class="text-center">{{__('projects/show.table.status')}}</th>
+                    @can('projectTask.viewTime', $project)
                     <th class="text-center">{{__('projects/show.table.time')}}</th>
+                    @endcan
                     <th class="text-center">{{__('projects/show.table.finances')}}</th>
                     <th></th>
                 </tr>
@@ -38,7 +40,12 @@
                     @include('projects.blocks.show_item')
                 @empty
                     <tr>
-                        <td class="text-center" colspan="6">{{__('projects/show.table.empty')}}</td>
+                        <td @can('projectTask.viewTime', $project)
+                            colspan="6"
+                            @else
+                            colspan="7"
+                            @endcan
+                            class="text-center">{{__('projects/show.table.empty')}}</td>
                     </tr>
                 @endforelse
                 </tbody>

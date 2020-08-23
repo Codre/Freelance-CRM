@@ -109,7 +109,7 @@
                     @include('projects.tasks.blocks.files')
                 </b-tab>
             @endcan
-            @can('projectTask.viewTime', $task)
+            @can('projectTask.viewTime', $project)
                 <b-tab title="{{ __('projects/tasks.times.title') }}">
                     <h3 class="mt-2 mb-2">{{ __('projects/tasks.times.title') }}</h3>
                     <ProjectTaskTimeList

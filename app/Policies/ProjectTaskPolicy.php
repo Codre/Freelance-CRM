@@ -185,15 +185,15 @@ class ProjectTaskPolicy
     /**
      * Может ли видеть затраченное время
      *
-     * @param User        $user
-     * @param ProjectTask $projectTask
+     * @param User    $user
+     * @param Project $project
      *
      * @return bool
      */
-    public function viewTime(User $user, ProjectTask $projectTask): bool
+    public function viewTime(User $user, Project $project): bool
     {
         if (!in_array(
-            $projectTask->project->users->find($user->id)->pivot->group,
+            $project->users->find($user->id)->pivot->group,
             [ProjectUser::GROUP_MANAGER, ProjectUser::GROUP_EXECUTOR]
         )) {
             return false;

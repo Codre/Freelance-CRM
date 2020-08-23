@@ -4,6 +4,7 @@ namespace App\Services\TaskTimes;
 
 use App\Models\ProjectTask;
 use App\Models\TaskTimes;
+use App\Services\TaskTimes\Handlers\CalcTimeByTaskIds;
 use App\Services\TaskTimes\Handlers\RunTaskHandler;
 use App\Services\TaskTimes\Handlers\StopTaskHandler;
 use App\Services\TaskTimes\Repositories\TaskTimesRepositoryInterface;
@@ -27,22 +28,29 @@ class TaskTimesService
      * @var TaskTimesRepositoryInterface
      */
     private $repository;
+    /**
+     * @var CalcTimeByTaskIds
+     */
+    private $calcTimeByTaskIds;
 
     /**
      * TaskTimesService constructor.
      *
      * @param RunTaskHandler               $runTaskHandler
      * @param StopTaskHandler              $stopTaskHandler
+     * @param CalcTimeByTaskIds            $calcTimeByTaskIds
      * @param TaskTimesRepositoryInterface $repository
      */
     public function __construct(
         RunTaskHandler $runTaskHandler,
         StopTaskHandler $stopTaskHandler,
+        CalcTimeByTaskIds $calcTimeByTaskIds,
         TaskTimesRepositoryInterface $repository
     ) {
         $this->runTaskHandler = $runTaskHandler;
         $this->stopTaskHandler = $stopTaskHandler;
         $this->repository = $repository;
+        $this->calcTimeByTaskIds = $calcTimeByTaskIds;
     }
 
     /**
@@ -80,5 +88,29 @@ class TaskTimesService
     public function updateComment(TaskTimes $taskTimes, string $comment): TaskTimes
     {
         return $this->repository->updateFromArray($taskTimes, ['comment' => $comment]);
+    }
+
+    /**
+     * Получить итоги времени по списку id тикетов
+     *
+     * @param array $taskIds
+     *
+     * @return array
+     */
+    public function calcTimeByTaskIds(array $taskIds): array
+    {
+        return $this->calcTimeByTaskIds->handle($taskIds);
+    }
+
+    /**
+     * Получить итоги времени по списку id тикетов залогированных текущим пользователем
+     *
+     * @param array $taskIds
+     *
+     * @return array
+     */
+    public function calcTimeByTaskIdsByCurrentUser(array $taskIds): array
+    {
+        return $this->calcTimeByTaskIds->handle($taskIds, true);
     }
 }

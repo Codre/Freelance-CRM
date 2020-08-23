@@ -1,6 +1,8 @@
 <?php
 /** @var \App\Models\ProjectTask $item */
 /** @var \App\Models\Project $project */
+/** @var array $times */
+/** @var array $finances */
 ?>
 <tr>
     <td class="text-center">
@@ -23,11 +25,21 @@
     <td class="text-center">
         {{ $statuses[$item->status] }}
     </td>
+    @can('projectTask.viewTime', $project)
     <td class="text-center">
-        @todo
+        @if(empty($times[$item->id]))
+            -
+        @else
+            {{ $times[$item->id]['h'] }}:{{ $times[$item->id]['m'] }}
+        @endif
     </td>
+    @endcan
     <td class="text-center">
-        @todo
+        @if(empty($finances[$item->id]))
+            -
+        @else
+            @moneyFormat($finances[$item->id])
+        @endif
     </td>
     <td>
         @can('projectFinance.viewAny', [$project, $item])

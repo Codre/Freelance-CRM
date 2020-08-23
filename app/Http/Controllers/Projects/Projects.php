@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Projects\Requests\StoreProjectRequest;
 use App\Http\Controllers\Projects\Requests\UpdateProjectRequest;
 use App\Models\ProjectTask;
+use App\Services\ProjectFinances\ProjectFinancesService;
 use App\Services\Projects\ProjectsService;
+use App\Services\TaskTimes\TaskTimesService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
@@ -19,10 +21,30 @@ class Projects extends Controller
      * @var ProjectsService
      */
     private $projectsService;
+    /**
+     * @var TaskTimesService
+     */
+    private $taskTimesService;
+    /**
+     * @var ProjectFinancesService
+     */
+    private $projectFinancesService;
 
-    public function __construct(ProjectsService $projectsService)
-    {
+    /**
+     * Projects constructor.
+     *
+     * @param ProjectsService        $projectsService
+     * @param TaskTimesService       $taskTimesService
+     * @param ProjectFinancesService $projectFinancesService
+     */
+    public function __construct(
+        ProjectsService $projectsService,
+        TaskTimesService $taskTimesService,
+        ProjectFinancesService $projectFinancesService
+    ) {
         $this->projectsService = $projectsService;
+        $this->taskTimesService = $taskTimesService;
+        $this->projectFinancesService = $projectFinancesService;
     }
 
     /**
@@ -83,11 +105,18 @@ class Projects extends Controller
             ->orderBy('updated_at', 'desc')
             ->paginate(20);
 
+        $taskIds = array_column($tasks->items(), 'id');
+
+        $times = $this->taskTimesService->calcTimeByTaskIds($taskIds);
+        $finances = $this->projectFinancesService->calcFinanceByTaskIdsForCurrentUser($project, $taskIds);
+
         return view('projects.show')->with([
             'project'  => $project,
             'title'    => $project->name,
             'statuses' => ProjectTask::getStatuses(),
             'tasks'    => $tasks,
+            'finances' => $finances,
+            'times'    => $times,
             'back'     => route('projects.index'),
         ]);
     }
