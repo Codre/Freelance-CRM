@@ -61,7 +61,7 @@ class ProjectMembers extends Controller
 
         $availableForAdding = $this->projectUsersService->getAvailableForAdding($project);
         $availableForAdding = $availableForAdding->keyBy('id')->map(function ($item) {
-            return $item['name'] . " [" . $item['email'] . "]";
+            return $item['name'] . " [" . $item['email'] . "] | " . $item->group->name;
         });
 
         return view('projects.members.create')->with([

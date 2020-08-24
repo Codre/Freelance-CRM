@@ -2,9 +2,13 @@
 
 namespace App\Services\Projects\Handlers;
 
+use App\Jobs\Queue;
+use App\Mail\ProjectMembers\CreatedMail;
 use App\Models\Project;
 use App\Models\ProjectUser;
+use App\Models\User;
 use App\Services\Projects\Repositories\ProjectsRepositoryInterface;
+use Illuminate\Support\Facades\Mail;
 
 class CreateProjectMemberHandler
 {
@@ -15,8 +19,7 @@ class CreateProjectMemberHandler
 
     public function __construct(
         ProjectsRepositoryInterface $projectRepository
-    )
-    {
+    ) {
         $this->projectRepository = $projectRepository;
     }
 
@@ -25,6 +28,14 @@ class CreateProjectMemberHandler
     {
         $data['project_id'] = $project->id;
 
-        return $this->projectRepository->createMemberFromArray($project, $data);
+        $projectUser = $this->projectRepository->createMemberFromArray($project, $data);
+
+        $user = User::find($projectUser->user_id);
+
+        Mail::to($user)->queue(
+            (new CreatedMail($project, $user, \Auth::user()))->onQueue(Queue::EMAILS)
+        );
+
+        return $projectUser;
     }
 }

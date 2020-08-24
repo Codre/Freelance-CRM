@@ -51,7 +51,7 @@ class EloquentProjectsRepository implements ProjectsRepositoryInterface
 
     public function getAvailableForAddingUsers(Project $project): Collection
     {
-        return User::whereNotIn('id', $project->users->map->id->toArray())->get();
+        return User::with('group')->whereNotIn('id', $project->users->map->id->toArray())->get();
     }
 
     public function createMemberFromArray(Project $project, array $data): ProjectUser
