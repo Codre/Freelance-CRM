@@ -10,9 +10,12 @@
         @endcan
     <td>
         @can('project.view', $item)
-            {{ link_to(route('projects.show', ['project' => $item->id]), $item->name) }}
+            {{ link_to(route('projects.show', ['project' => $item->id]), $item->name, [
+                'class' => 'js-project-name',
+                'data-id' => $item->id
+            ]) }}
         @else
-            <b>{{ $item->name }}</b>
+            <b class="js-project-name" data-id="{{ $item->id }}">{{ $item->name }}</b>
         @endcan
     </td>
     <td class="text-center">
@@ -32,10 +35,11 @@
             </a>
         @endcan
         @can('project.update', $item)
-            <a href="{{ route('projects.edit', ['project' => $item->id]) }}" class="btn btn-primary btn-sm"
-               v-b-tooltip.hover title="{{ __('projects/general.index.item.edit') }}">
-                @materialicon('content', 'create', 'white')
-            </a>
+            <ProjectsEditPopupBtn
+                id="{{ $item->id }}"
+                route_edit="{{ route('ajax.projects.edit', ['project' => $item]) }}"
+                route_update="{{ route('ajax.projects.update', ['project' => $item]) }}"
+            >@materialicon('content', 'create', 'white')</ProjectsEditPopupBtn>
         @endcan
         @can('project.delete', $item)
             {{ Form::open(['route' => ['projects.destroy', 'project' => $item->id], 'method' => 'delete', 'class' => 'd-inline-block'])}}

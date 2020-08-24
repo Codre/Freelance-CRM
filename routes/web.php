@@ -22,7 +22,7 @@ Route::middleware(['auth'])->group(function () {
     ]);
     Route::resource('projects.members', 'Projects\ProjectMembers')->except(['show']);
     Route::resource('projects.tasks', 'Projects\ProjectTasks')->except(['index']);
-    Route::resource('projects', 'Projects\Projects')->except(['create']);
+    Route::resource('projects', 'Projects\Projects')->except(['create', 'edit', 'update']);
     Route::resource('projects.tasks.comments', 'Projects\TaskComment')->only(['store']);
     Route::resource('projects.tasks.times', 'Projects\TaskTimes')->only(['update']);
     Route::resource('projects.tasks.files', 'Projects\TaskFiles')->only(['show', 'store', 'destroy']);
@@ -38,6 +38,12 @@ Route::middleware(['auth'])->group(function () {
         ->name('projects.tasks.ready');
     Route::post('projects/{project}}/tasks/{task}/finishing', 'Projects\ProjectTasks@finishing')
         ->name('projects.tasks.finishing');
+
+
+    /** Ajax Routes */
+    Route::prefix('ajax')->name('ajax.')->group(function () {
+        Route::resource('projects', 'Ajax\Projects\Project')->only('update', 'edit');
+    });
 });
 
 Auth::routes(['register' => false]);

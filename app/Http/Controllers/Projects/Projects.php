@@ -122,55 +122,6 @@ class Projects extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return View
-     * @throws AuthorizationException
-     */
-    public function edit(int $id)
-    {
-        $project = $this->projectsService->findProject($id);
-
-        if (!$project) {
-            abort(404);
-        }
-
-        $this->authorize('project.update', $project);
-
-        return view('projects.edit')->with([
-            'project' => $project,
-            'title'   => __("projects/edit.title"),
-            'back'    => route('projects.show', ['project' => $project]),
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UpdateProjectRequest $request
-     * @param int                  $id
-     *
-     * @return RedirectResponse|Redirector
-     * @throws AuthorizationException
-     */
-    public function update(UpdateProjectRequest $request, $id)
-    {
-        $project = $this->projectsService->findProject($id);
-
-        if (!$project) {
-            abort(404);
-        }
-
-        $this->authorize('project.update', $project);
-
-        $this->projectsService->updateProject($project, $request->getFormData());
-
-        return redirect(route('projects.show', ['project' => $project->id]));
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param int $id

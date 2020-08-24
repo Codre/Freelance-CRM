@@ -11,6 +11,9 @@ window.Summernote = require('summernote');
 window.Summernote = require('summernote/lang/summernote-ru-RU');
 window.nl2br  = require('nl2br');
 
+import swal from 'sweetalert';
+window.swal = swal;
+
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
