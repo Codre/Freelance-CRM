@@ -24,7 +24,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('projects.tasks', 'Projects\ProjectTasks')->except(['index']);
     Route::resource('projects', 'Projects\Projects')->except(['create', 'edit', 'update']);
     Route::resource('projects.tasks.comments', 'Projects\TaskComment')->only(['store']);
-    Route::resource('projects.tasks.times', 'Projects\TaskTimes')->only(['update']);
     Route::resource('projects.tasks.files', 'Projects\TaskFiles')->only(['show', 'store', 'destroy']);
 
     Route::resource('projects.finances', 'Projects\ProjectFinanceController')
@@ -43,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
     /** Ajax Routes */
     Route::prefix('ajax')->name('ajax.')->group(function () {
         Route::resource('projects', 'Ajax\Projects\Project')->only('update', 'edit');
+        Route::resource('projects.tasks.times', 'Ajax\Projects\TaskTimes')->only(['update']);
     });
 });
 

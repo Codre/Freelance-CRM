@@ -37,6 +37,7 @@
         @can('project.update', $item)
             <ProjectsEditPopupBtn
                 id="{{ $item->id }}"
+                btn_class="btn-sm"
                 route_edit="{{ route('ajax.projects.edit', ['project' => $item]) }}"
                 route_update="{{ route('ajax.projects.update', ['project' => $item]) }}"
             >@materialicon('content', 'create', 'white')</ProjectsEditPopupBtn>

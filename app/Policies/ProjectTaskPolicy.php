@@ -67,6 +67,10 @@ class ProjectTaskPolicy
      */
     public function update(User $user, ProjectTask $projectTask)
     {
+        if (in_array($projectTask->status, [ProjectTask::STATUS_FINISHED, ProjectTask::STATUS_READY])) {
+            return false;
+        }
+
         return in_array($projectTask->project->users->find($user->id)->pivot->group, ProjectUser::CAN_CREATE_TASKS);
     }
 

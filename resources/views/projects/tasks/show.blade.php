@@ -40,12 +40,12 @@
                         'route' => ['projects.tasks.ready', 'project' => $project, 'task' => $task],
                          'method' => 'POST'
                       ]) !!}
-                        <button v-b-tooltip.hover
-                                title="{{ __('projects/tasks.show.ready') }}"
-                                class="btn btn-primary m-1"
-                                type="submit">
-                            @materialicon('action', 'done', 'white')
-                        </button>
+                    <button v-b-tooltip.hover
+                            title="{{ __('projects/tasks.show.ready') }}"
+                            class="btn btn-primary m-1"
+                            type="submit">
+                        @materialicon('action', 'done', 'white')
+                    </button>
                     {!! Form::close() !!}
                 </div>
             @endcan
@@ -55,12 +55,12 @@
                         'route' => ['projects.tasks.finishing', 'project' => $project, 'task' => $task],
                          'method' => 'POST'
                       ]) !!}
-                        <button v-b-tooltip.hover
-                                title="{{ __('projects/tasks.show.finishing') }}"
-                                class="btn btn-primary m-1"
-                                type="submit">
-                            @materialicon('action', 'done_all', 'white')
-                        </button>
+                    <button v-b-tooltip.hover
+                            title="{{ __('projects/tasks.show.finishing') }}"
+                            class="btn btn-primary m-1"
+                            type="submit">
+                        @materialicon('action', 'done_all', 'white')
+                    </button>
                     {!! Form::close() !!}
                 </div>
             @endcan
@@ -68,7 +68,8 @@
                class="btn btn-success m-1">{{ __('projects/tasks.show.change') }}</a>
         </div>
     @endcan
-    <h1>{{ $title }} <span class="badge badge-secondary" style="font-size: 14px">{{ $statuses[$task->status] }}</span></h1>
+    <h1>{{ $title }} <span class="badge badge-secondary" style="font-size: 14px">{{ $statuses[$task->status] }}</span>
+    </h1>
 
     <div class="card">
         <div class="card-body">
@@ -113,9 +114,11 @@
                 <b-tab title="{{ __('projects/tasks.times.title') }}">
                     <h3 class="mt-2 mb-2">{{ __('projects/tasks.times.title') }}</h3>
                     <ProjectTaskTimeList
-                        csrf="{{ csrf_token() }}"
-                        store_url="{{ route('projects.tasks.times.update', ['project' => $project, 'task' => $task, 'time' => 0]) }}"
+                        store_url="{{ route('ajax.projects.tasks.times.update', ['project' => $project, 'task' => $task, 'time' => 0]) }}"
                         user_id="{{ Auth::id() }}"
+                        @can('projectTask.update', $task)
+                        can="true"
+                        @endcan
                         list='{!! $times->toJson() !!}'></ProjectTaskTimeList>
                 </b-tab>
             @endcan

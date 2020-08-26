@@ -91,6 +91,22 @@ class TaskTimesService
     }
 
     /**
+     * Обновить время
+     *
+     * @param TaskTimes $taskTimes
+     * @param string    $time
+     *
+     * @return TaskTimes
+     */
+    public function updateTime(TaskTimes $taskTimes, string $time): TaskTimes
+    {
+        $path = explode(':', $time);
+        $total = (int)$path[0] * 60 + (int)$path[1];
+
+        return $this->repository->updateFromArray($taskTimes, ['total' => $total]);
+    }
+
+    /**
      * Получить итоги времени по списку id тикетов
      *
      * @param array $taskIds

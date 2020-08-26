@@ -8,16 +8,23 @@
                    class="btn btn-success m-1">{{ __('projects/show.create_task') }}</a>
             @endcan
             @can('projectFinance.viewAny', $project)
-                <a href="{{ route('projects.finances.create', ['project' => $project]) }}" class="btn btn-secondary btn-sm"
+                <a href="{{ route('projects.finances.create', ['project' => $project]) }}"
+                   class="btn btn-secondary btn-sm"
                    v-b-tooltip.hover title="{{ __('projects/show.finances') }}">
                     @materialicon('editor', 'monetization_on', 'white')
                 </a>
             @endcan
-            <a href="{{ route('projects.edit', ['project' => $project['id']]) }}"
-               class="btn btn-primary m-1">{{ __('projects/show.change') }}</a>
+            @can('project.update', $project)
+                <ProjectsEditPopupBtn
+                    btn_class=""
+                    id="{{ $project->id }}"
+                    route_edit="{{ route('ajax.projects.edit', ['project' => $project]) }}"
+                    route_update="{{ route('ajax.projects.update', ['project' => $project]) }}"
+                >{{ __('projects/show.change') }}</ProjectsEditPopupBtn>
+            @endcan
         </div>
     @endcan
-    <h1>{{ $title }}</h1>
+    <h1 class="js-project-name" data-id="{{ $project->id }}">{{ $title }}</h1>
 
     <div class="card">
         <div class="card-body">
@@ -29,7 +36,7 @@
                     <th>{{__('projects/show.table.name')}}</th>
                     <th class="text-center">{{__('projects/show.table.status')}}</th>
                     @can('projectTask.viewTime', $project)
-                    <th class="text-center">{{__('projects/show.table.time')}}</th>
+                        <th class="text-center">{{__('projects/show.table.time')}}</th>
                     @endcan
                     <th class="text-center">{{__('projects/show.table.finances')}}</th>
                     <th></th>

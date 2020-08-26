@@ -1,6 +1,6 @@
 <template>
     <span>
-        <b-button variant="primary" class="btn-sm"
+        <b-button variant="primary" :class="btn_class"
                   v-b-tooltip.hover :title="lang.btn"
                   @click="loadModel">
             <slot></slot>
@@ -41,7 +41,7 @@
 <script>
 export default {
     props: [
-        'route_edit', 'route_update'
+        'route_edit', 'route_update', 'btn_class'
     ],
     data() {
         return {
