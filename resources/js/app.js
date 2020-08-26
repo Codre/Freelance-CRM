@@ -45,3 +45,4 @@ const app = new Vue({
 });
 
 require('./editor')
+require('./confirm')

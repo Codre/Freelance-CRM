@@ -56,7 +56,7 @@
         @endcan
         @can('projectTask.delete', $item)
             {{ Form::open(['route' => ['projects.tasks.destroy', 'project' => $project, 'task' => $item], 'method' => 'delete', 'class' => 'd-inline-block'])}}
-            <button type="submit" class="btn btn-danger btn-sm"
+            <button type="submit" class="btn btn-danger btn-sm js-confirm"
                     v-b-tooltip.hover title="{{ __('projects/show.item.delete') }}">@materialicon('action', 'delete', 'white')</button>
             {{ Form::close() }}
         @endcan

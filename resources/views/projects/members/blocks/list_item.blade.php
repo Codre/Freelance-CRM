@@ -16,7 +16,7 @@
                     @materialicon('content', 'create', 'white')
                 </a>
                 {{ Form::open(['route' => ['projects.members.destroy', 'project' => $project, 'member' => $item], 'method' => 'delete', 'class' => 'd-inline-block'])}}
-                <button type="submit" class="btn btn-danger btn-sm"
+                <button type="submit" class="btn btn-danger btn-sm js-confirm"
                         v-b-tooltip.hover title="{{ __('projects/members.index.item.delete') }}">@materialicon('action',
                     'delete', 'white')
                 </button>
