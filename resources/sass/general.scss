@@ -11,6 +11,11 @@ header {
     margin-right: 0;
 }
 
+.container {
+    min-height: calc(100vh - 90px);
+    position: relative;
+}
+
 .icon {
     &.white {
         fill: #fff;

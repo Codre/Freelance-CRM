@@ -50,3 +50,6 @@ Auth::routes(['register' => false]);
 
 Route::get('client/invite/', 'Clients\Invite@index')->name('client.invite');
 Route::post('client/invite/', 'Clients\Invite@store')->name('client.invite.store');
+Route::get('info/offer/', 'Info@offer')->name('info.offer');
+Route::get('info/rules/', 'Info@rules')->name('info.rules');
+Route::get('info/privacy/', 'Info@privacy')->name('info.privacy');

@@ -14,6 +14,12 @@
                 {!! Form::label('password_confirmation', __('clients/invite.password.check.label')) !!}
                 {!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => __('clients/invite.password.check.placeholder')]) !!}
             </div>
+            <div class="form-group">
+                {{ __('clients/invite.info.message') }}
+                <a href="{{ route('info.privacy', $requestParams) }}" target="_blank">{{ __('clients/invite.info.privacy') }}</a>,
+                <a href="{{ route('info.rules', $requestParams) }}" target="_blank">{{ __('clients/invite.info.rules') }}</a>,
+                <a href="{{ route('info.offer', $requestParams) }}" target="_blank">{{ __('clients/invite.info.offer') }}</a>.
+            </div>
         </div>
         <div class="card-footer">
             {!! Form::submit(__('clients/invite.submit'), ['class' => 'btn btn-primary']) !!}
