@@ -24,6 +24,7 @@ use App\Services\Users\Repositories\EloquentUsersRepository;
 use App\Services\Users\Repositories\UsersRepositoryInterface;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -57,6 +58,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
+
         Blade::directive('moneyFormat', function ($money) {
             return "<?php echo number_format($money, 2, ',', ' ') . 'р.'; ?>";
         });
