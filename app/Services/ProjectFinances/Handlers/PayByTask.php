@@ -67,7 +67,7 @@ class PayByTask
     private function getFinances()
     {
         $finances = ProjectFinance::whereProjectId($this->task->project->id)
-            ->whereTaskId($this->task->project->id);
+            ->whereTaskId($this->task->id);
         if (!$finances->count()) {
             $finances = ProjectFinance::whereProjectId($this->task->project->id)->whereNull('task_id');
         }
