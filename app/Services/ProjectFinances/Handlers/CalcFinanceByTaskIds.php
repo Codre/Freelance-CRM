@@ -53,7 +53,7 @@ class CalcFinanceByTaskIds
         $taskFinances = ProjectFinance::whereIn('task_id', $taskIds)
             ->where('user_id', '=', \Auth::id())->get();
 
-        if (!$projectFinance && !$taskFinances) {
+        if (!$projectFinance && !$taskFinances->toArray()) {
             return [];
         }
 
