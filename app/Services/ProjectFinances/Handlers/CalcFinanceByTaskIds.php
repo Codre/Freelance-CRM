@@ -53,6 +53,10 @@ class CalcFinanceByTaskIds
         $taskFinances = ProjectFinance::whereIn('task_id', $taskIds)
             ->where('user_id', '=', \Auth::id())->get();
 
+        if (!$projectFinance && !$taskFinances) {
+            return [];
+        }
+
         $userGroup = $project->users->find(\Auth::id())->pivot->group;
 
         if (in_array($userGroup, [ProjectUser::GROUP_EXECUTOR, ProjectUser::GROUP_MANAGER])) {
