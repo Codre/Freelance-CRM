@@ -245,7 +245,6 @@ class ProjectTasks extends Controller
      */
     public function finishing(Request $request, Project $project, ProjectTask $task)
     {
-        $this->authorize('projectTask.update', $task);
         $this->authorize('projectTask.finishing', $task);
 
         $this->projectTasksService->finished($task);
