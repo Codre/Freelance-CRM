@@ -20,7 +20,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
-window.tranlate=require('./VueTranslation/Translation').default.translate;
+window.translate=require('./VueTranslation/Translation').default.translate;
 Vue.prototype.translate=require('./VueTranslation/Translation').default.translate;
 
 /**
