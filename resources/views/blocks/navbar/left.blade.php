@@ -17,6 +17,10 @@
     @include('blocks.navbar.blocks.left_item', ['page' => 'staffs'])
     @endcan
 
+    @can('doc.company.viewAny')
+    @include('blocks.navbar.blocks.left_item', ['page' => 'docs'])
+    @endcan
+
     {{--@include('blocks.navbar.blocks.left_item', ['page' => 'stat'])--}}
     {{--@include('blocks.navbar.blocks.left_item', ['page' => 'support'])--}}
 </div>

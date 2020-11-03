@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Project;
 use App\Models\ProjectTask;
 use App\Policies\ClientPolicy;
+use App\Policies\CompanyPolicy;
 use App\Policies\ProjectFinancePolicy;
 use App\Policies\ProjectPolicy;
 use App\Policies\ProjectTaskPolicy;
@@ -43,6 +44,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::resource('project', ProjectPolicy::class);
         Gate::resource('projectFinance', ProjectFinancePolicy::class);
         Gate::resource('taskFile', TaskFilePolicy::class);
+        Gate::resource('doc.company', CompanyPolicy::class);
 
         Gate::resource('projectTask', ProjectTaskPolicy::class);
         Gate::define('projectTask.run', ProjectTaskPolicy::class . '@run');

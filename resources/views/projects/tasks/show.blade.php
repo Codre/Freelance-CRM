@@ -73,7 +73,13 @@
 
     <div class="card">
         <div class="card-body">
-            {!! $task->description !!}
+            @can('projectTask.update', $task)
+                <ProjectTaskDescriptionEdit
+                    save_route="{{ route('ajax.projects.tasks.autoSave', ['project' => $project, 'task' => $task]) }}"
+                >{!! $task->description !!}</ProjectTaskDescriptionEdit>
+            @else
+                {!! $task->description !!}
+            @endcan
         </div>
     </div>
 
@@ -104,9 +110,11 @@
             @can('taskFile.viewAny', $project)
                 <b-tab title="{{ __('projects/tasks.files.title') }}">
                     <h3 class="mt-2 mb-2">{{ __('projects/tasks.files.title') }}</h3>
+                    @can('projectTask.update', $task)
                     <DropzoneUpload
                             action="{{ route('projects.tasks.files.store', ['project' => $project, 'task' => $task])}}"
                     ></DropzoneUpload>
+                    @endcan
                     @include('projects.tasks.blocks.files')
                 </b-tab>
             @endcan

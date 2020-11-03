@@ -20,6 +20,10 @@ Route::middleware(['auth'])->group(function () {
         'staffs'  => 'Staffs\Staffs',
         'clients' => 'Clients\Clients',
     ]);
+
+    Route::get('docs/', 'Docs\Company@index');
+
+    Route::resource('docs_company', 'Docs\Company')->except(['index']);
     Route::resource('projects.members', 'Projects\ProjectMembers')->except(['show']);
     Route::resource('projects.tasks', 'Projects\ProjectTasks')->except(['index']);
     Route::resource('projects', 'Projects\Projects')->except(['create', 'edit', 'update']);
