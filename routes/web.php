@@ -35,11 +35,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('projects.tasks.finances', 'Projects\ProjectFinanceController')
         ->only(['create', 'store']);
 
-    Route::post('projects/{project}}/tasks/{task}/run', 'Projects\ProjectTasks@run')
+    Route::post('projects/{project}/tasks/{task}/run', 'Projects\ProjectTasks@run')
         ->name('projects.tasks.run');
-    Route::post('projects/{project}}/tasks/{task}/ready', 'Projects\ProjectTasks@ready')
+    Route::post('projects/{project}/tasks/{task}/ready', 'Projects\ProjectTasks@ready')
         ->name('projects.tasks.ready');
-    Route::post('projects/{project}}/tasks/{task}/finishing', 'Projects\ProjectTasks@finishing')
+    Route::post('projects/{project}/tasks/{task}/finishing', 'Projects\ProjectTasks@finishing')
         ->name('projects.tasks.finishing');
 
 
@@ -47,6 +47,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('ajax')->name('ajax.')->group(function () {
         Route::resource('projects', 'Ajax\Projects\Project')->only('update', 'edit');
         Route::resource('projects.tasks.times', 'Ajax\Projects\TaskTimes')->only(['update']);
+
+        Route::patch('projects/{project}/tasks/{task}/autoSave', 'Ajax\Projects\ProjectTasks@autoSave')
+            ->name('projects.tasks.autoSave');
     });
 });
 
