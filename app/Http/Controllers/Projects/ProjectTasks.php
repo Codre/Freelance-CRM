@@ -79,7 +79,11 @@ class ProjectTasks extends Controller
     {
         $this->authorize('projectTask.create', $project);
 
-        $task = $this->projectTasksService->create($project, $request->getFormData(), $request->file('files'));
+        $task = $this->projectTasksService->create(
+            $project,
+            $request->getFormData(),
+            $request->file('files') ?? []
+        );
 
         return redirect(route('projects.tasks.show', ['project' => $project, 'task' => $task]));
     }
