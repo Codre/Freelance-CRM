@@ -64,4 +64,21 @@ class TaskTimes extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Получить отображение времени
+     * @return string
+     */
+    public function getTimeView(): string
+    {
+        $h = floor($this->total / 60);
+        $m = $this->total - $h * 60;
+
+        return ($h < 10 ? '0' . $h : $h) . ':' . ($m < 10 ? '0' . $m : $m);
+    }
+
+    public function getTotalFinance(): float
+    {
+
+    }
 }

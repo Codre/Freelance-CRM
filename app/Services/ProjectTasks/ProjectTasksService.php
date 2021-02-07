@@ -143,4 +143,23 @@ class ProjectTasksService
             'status' => ProjectTask::STATUS_PAUSE
         ]);
     }
+
+    /**
+     * Получить учёт времени
+     *
+     * @param  ProjectTask  $task
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getTimesByTask(ProjectTask $task): \Illuminate\Database\Eloquent\Collection
+    {
+        $times = $task->times()->with(['user'])->orderBy('updated_at', 'desc')->get();
+
+        foreach ($times as &$item) {
+            $item->date = $item->updated_at->toDateTimeString();
+        }
+        unset($item);
+
+        return $times;
+    }
 }

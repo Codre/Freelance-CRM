@@ -120,7 +120,13 @@
             @endcan
             @can('projectTask.viewTime', $project)
                 <b-tab title="{{ __('projects/tasks.times.title') }}">
-                    <h3 class="mt-2 mb-2">{{ __('projects/tasks.times.title') }}</h3>
+                    <h3 class="mt-2 mb-2">
+                        {{ __('projects/tasks.times.title') }}
+                        <a href="{{ route('projects.tasks.timesReceipt', ['project' => $project, 'task' => $task]) }}"
+                           title="{{ __('projects/tasks.times.receipt') }}" v-b-tooltip.hover target="_blank"
+                           class="btn btn-sm btn-default">@materialicon('action', 'receipt')</a>
+                    </h3>
+
                     <ProjectTaskTimeList
                             store_url="{{ route('ajax.projects.tasks.times.update', ['project' => $project, 'task' => $task, 'time' => 0]) }}"
                             user_id="{{ Auth::id() }}"

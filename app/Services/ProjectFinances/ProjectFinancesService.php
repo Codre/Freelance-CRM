@@ -5,6 +5,7 @@ namespace App\Services\ProjectFinances;
 use App\Models\Project;
 use App\Models\ProjectTask;
 use App\Services\ProjectFinances\Handlers\CalcFinanceByTaskIds;
+use App\Services\ProjectFinances\Handlers\CalcFinanceByTaskIdsDetailed;
 use App\Services\ProjectFinances\Handlers\PayByTask;
 use App\Services\ProjectFinances\Handlers\SaveHandler;
 use App\Services\ProjectFinances\Repositories\ProjectFinancesRepositoryInterface;
@@ -33,6 +34,10 @@ class ProjectFinancesService
      * @var CalcFinanceByTaskIds
      */
     private $calcFinanceByTaskIds;
+    /**
+     * @var CalcFinanceByTaskIdsDetailed
+     */
+    private $calcFinanceByTaskIdsDetailed;
 
     /**
      * ProjectFinancesService constructor.
@@ -46,12 +51,14 @@ class ProjectFinancesService
         ProjectFinancesRepositoryInterface $repository,
         SaveHandler $saveHandler,
         PayByTask $payByTask,
-        CalcFinanceByTaskIds $calcFinanceByTaskIds
+        CalcFinanceByTaskIds $calcFinanceByTaskIds,
+        CalcFinanceByTaskIdsDetailed $calcFinanceByTaskIdsDetailed
     ) {
         $this->repository = $repository;
         $this->saveHandler = $saveHandler;
         $this->payByTask = $payByTask;
         $this->calcFinanceByTaskIds = $calcFinanceByTaskIds;
+        $this->calcFinanceByTaskIdsDetailed = $calcFinanceByTaskIdsDetailed;
     }
 
     /**
@@ -100,5 +107,18 @@ class ProjectFinancesService
     public function calcFinanceByTaskIdsForCurrentUser(Project $project, array $taskIds): array
     {
         return $this->calcFinanceByTaskIds->handle($project, $taskIds);
+    }
+
+    /**
+     * Получить финансы по списку задач (подробный отчёт)
+     *
+     * @param Project $project
+     * @param array   $taskIds
+     *
+     * @return array
+     */
+    public function calcFinanceByTaskIdsUserDetailed(Project $project, array $taskIds): array
+    {
+        return $this->calcFinanceByTaskIdsDetailed->handle($project, $taskIds);
     }
 }

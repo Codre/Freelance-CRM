@@ -41,6 +41,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('projects.tasks.ready');
     Route::post('projects/{project}/tasks/{task}/finishing', 'Projects\ProjectTasks@finishing')
         ->name('projects.tasks.finishing');
+    Route::get('projects/{project}/tasks/{task}/timesReceipt', 'Projects\ProjectTasks@timesReceipt')
+        ->name('projects.tasks.timesReceipt');
 
 
     /** Ajax Routes */
