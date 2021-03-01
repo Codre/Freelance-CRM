@@ -274,7 +274,6 @@ class ProjectTasks extends Controller
      */
     public function timesReceipt(Project $project, ProjectTask $task)
     {
-        $this->authorize('projectTask.ready', $task);
         $this->authorize('projectTask.viewTime', $project);
 
         return view('projects.tasks.timesReceipt')->with(
