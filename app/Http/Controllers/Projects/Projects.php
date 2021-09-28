@@ -102,7 +102,7 @@ class Projects extends Controller
 
         $tasks = $project->tasks()
             ->with(['user', 'project'])
-            ->orderBy('creaed_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(20);
 
         $taskIds = array_column($tasks->items(), 'id');
