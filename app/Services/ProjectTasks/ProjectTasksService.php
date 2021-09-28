@@ -153,7 +153,7 @@ class ProjectTasksService
      */
     public function getTimesByTask(ProjectTask $task): \Illuminate\Database\Eloquent\Collection
     {
-        $times = $task->times()->with(['user'])->orderBy('updated_at', 'desc')->get();
+        $times = $task->times()->with(['user'])->orderBy('created_at', 'desc')->get();
 
         foreach ($times as &$item) {
             $item->date = $item->updated_at->toDateTimeString();
