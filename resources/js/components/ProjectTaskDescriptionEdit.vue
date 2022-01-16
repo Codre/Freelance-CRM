@@ -51,11 +51,11 @@ export default {
 
                             if (!response.status) {
                                 console.error(response);
-                                swal(tranlate('errors.ajax.error.title'), tranlate('errors.ajax.error.message'), 'error');
+                                swal(translate('errors.ajax.error.title'), translate('errors.ajax.error.message'), 'error');
                             }
                         }.bind(this)).catch(function (error) {
                             console.error(error);
-                            swal(tranlate('errors.ajax.error.title'), tranlate('errors.ajax.error.message'), 'error');
+                            swal(translate('errors.ajax.error.title'), translate('errors.ajax.error.message'), 'error');
                         });
                     }.bind(this), 3000);
                 }.bind(this)

@@ -74,7 +74,7 @@ export default {
                 this.name = response.data.name;
             }.bind(this)).catch(function (error) {
                 console.error(error);
-                swal(tranlate('errors.ajax.error.title'), tranlate('errors.ajax.error.message'), 'error');
+                swal(translate('errors.ajax.error.title'), translate('errors.ajax.error.message'), 'error');
             });
         },
         checkFormValidity() {
@@ -104,14 +104,14 @@ export default {
             }).then(function (response) {
                 this.$refs['modal'].hide();
                 if (!response.data.status) {
-                    swal(tranlate('errors.ajax.error.title'), tranlate('errors.ajax.error.message'), 'error');
+                    swal(translate('errors.ajax.error.title'), translate('errors.ajax.error.message'), 'error');
                 } else {
                     $('.js-project-name[data-id=25]').html(response.data.data.name);
                 }
             }.bind(this)).catch(function (error) {
                 console.error(error);
                 this.$refs['modal'].hide();
-                swal(tranlate('errors.ajax.error.title'), tranlate('errors.ajax.error.message'), 'error');
+                swal(translate('errors.ajax.error.title'), translate('errors.ajax.error.message'), 'error');
             });
         }
     }

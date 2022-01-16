@@ -107,7 +107,7 @@ export default {
                 this.toggleEdit(id);
             }.bind(this)).catch(function(error) {
                 console.error(error);
-                swal(tranlate('errors.ajax.error.title'), tranlate('errors.ajax.error.message'), 'error');
+                swal(translate('errors.ajax.error.title'), translate('errors.ajax.error.message'), 'error');
                 this.saving = false;
             }.bind(this));
         },
