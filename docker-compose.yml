@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    image: mysql
+    platform: linux/x86_64
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: fcrm
+      MYSQL_USER: fcrm
+      MYSQL_PASSWORD: fcrm
+      MYSQL_DATABASE: fcrm
+    container_name: db
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
