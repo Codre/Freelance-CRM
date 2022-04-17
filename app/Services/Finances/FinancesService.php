@@ -3,7 +3,10 @@
 namespace App\Services\Finances;
 
 use App\Models\Finance;
+use App\Models\ProjectTask;
+use App\Services\Finances\Handlers\CreateInvoiceHandler;
 use App\Services\Finances\Handlers\CreateHandler;
+use App\Services\ProjectFinances\ProjectFinancesService;
 
 /**
  * Class FinancesService
@@ -15,16 +18,26 @@ class FinancesService
     /**
      * @var CreateHandler
      */
-    private $createHandler;
+    private CreateHandler $createHandler;
+    /**
+     * @var CreateInvoiceHandler
+     */
+    private CreateInvoiceHandler $createInvoiceHandler;
+    private ProjectFinancesService $projectFinancesService;
 
     /**
      * FinancesService constructor.
      *
-     * @param CreateHandler $createHandler
+     * @param CreateHandler        $createHandler
+     * @param CreateInvoiceHandler $createInvoiceHandler
      */
-    public function __construct(CreateHandler $createHandler)
+    public function __construct(
+        CreateHandler $createHandler,
+        CreateInvoiceHandler $createInvoiceHandler
+    )
     {
         $this->createHandler = $createHandler;
+        $this->createInvoiceHandler = $createInvoiceHandler;
     }
 
     /**
@@ -39,4 +52,15 @@ class FinancesService
         return $this->createHandler->handler($data);
     }
 
+    /**
+     * Создать счёт на оплату
+     *
+     * @param ProjectTask $task
+     *
+     * @return void
+     */
+    public function createInvoice(ProjectTask $task): void
+    {
+        $this->createInvoiceHandler->handler($task);
+    }
 }

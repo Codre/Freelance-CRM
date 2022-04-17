@@ -21,23 +21,23 @@ class ProjectFinancesService
     /**
      * @var ProjectFinancesRepositoryInterface
      */
-    private $repository;
+    private ProjectFinancesRepositoryInterface $repository;
     /**
      * @var SaveHandler
      */
-    private $saveHandler;
+    private SaveHandler $saveHandler;
     /**
      * @var PayByTask
      */
-    private $payByTask;
+    private PayByTask $payByTask;
     /**
      * @var CalcFinanceByTaskIds
      */
-    private $calcFinanceByTaskIds;
+    private CalcFinanceByTaskIds $calcFinanceByTaskIds;
     /**
      * @var CalcFinanceByTaskIdsDetailed
      */
-    private $calcFinanceByTaskIdsDetailed;
+    private CalcFinanceByTaskIdsDetailed $calcFinanceByTaskIdsDetailed;
 
     /**
      * ProjectFinancesService constructor.
@@ -46,6 +46,7 @@ class ProjectFinancesService
      * @param SaveHandler                        $saveHandler
      * @param PayByTask                          $payByTask
      * @param CalcFinanceByTaskIds               $calcFinanceByTaskIds
+     * @param CalcFinanceByTaskIdsDetailed       $calcFinanceByTaskIdsDetailed
      */
     public function __construct(
         ProjectFinancesRepositoryInterface $repository,

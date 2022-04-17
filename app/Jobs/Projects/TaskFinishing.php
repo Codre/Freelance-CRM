@@ -4,6 +4,7 @@ namespace App\Jobs\Projects;
 
 use App\Models\ProjectTask;
 use App\Models\User;
+use App\Services\Finances\FinancesService;
 use App\Services\ProjectFinances\ProjectFinancesService;
 use App\Services\ProjectTasks\Exceptions\AllProjectUsersMethodNotFoundException;
 use App\Services\ProjectTasks\ProjectTasksEmailsService;
@@ -42,18 +43,20 @@ class TaskFinishing implements ShouldQueue
      * Execute the job.
      *
      * @param ProjectTasksEmailsService $projectTasksEmailsService
-     * @param ProjectFinancesService    $financesService
+     * @param ProjectFinancesService    $projectFinancesService
+     * @param FinancesService           $financesService
      *
      * @return void
      * @throws AllProjectUsersMethodNotFoundException
      */
     public function handle(
         ProjectTasksEmailsService $projectTasksEmailsService,
-        ProjectFinancesService $financesService
+        ProjectFinancesService $projectFinancesService,
+        FinancesService $financesService
     ) {
-        // @todo add to bill
+        $financesService->createInvoice($this->task);
 
-        $financesService->payByTask($this->task);
+        $projectFinancesService->payByTask($this->task);
 
         $projectTasksEmailsService->forAllProjectUsers($this->task, 'finished', $this->who);
     }

@@ -13,17 +13,16 @@ use Illuminate\Database\Eloquent\Collection;
  *
  * @package App\Services\ProjectFinances\Handlers
  */
-class PayByTask
+final class PayByTask
 {
-
     /**
      * @var ProjectTask
      */
-    private $task;
+    private ProjectTask $task;
     /**
      * @var FinancesService
      */
-    private $financesService;
+    private FinancesService $financesService;
 
     /**
      * PayByTask constructor.
@@ -37,8 +36,9 @@ class PayByTask
 
     /**
      * @param ProjectTask $task
+     * @todo переделать на поиск часов по каждому пользователю
      */
-    public function handle(ProjectTask $task)
+    public function handle(ProjectTask $task): void
     {
         if (!$task->times->count() || !$minutes = $task->times->sum('total')) {
             return;
@@ -99,7 +99,7 @@ class PayByTask
 
             $return[$finance->user_id] = [
                 'user_id'   => $finance->user_id,
-                'operation' => in_array($group, [ProjectUser::GROUP_CUSTOMER]) ? 0 : 1,
+                'operation' => (int)$group === ProjectUser::GROUP_CUSTOMER ? 0 : 1,
                 'sum'       => round($finance->bet * $hours, 2),
                 'comment'   => __('projects/finances.handlers.payByTask.comment', ['title' => $this->task->title]),
             ];
