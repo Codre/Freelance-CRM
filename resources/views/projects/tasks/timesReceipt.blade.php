@@ -11,6 +11,7 @@
     {{ __('projects/tasks.timesReceipt.taskCreate') }}: <b>{{ $task->created_at->toDateTimeString() }}</b><br />
     {{ __('projects/tasks.timesReceipt.date') }}: <b>{{ now()->toDateTimeString() }}</b><br />
     {{ __('projects/tasks.timesReceipt.total') }}: <b>@moneyFormat(array_sum($finances[$task->id]))</b><br />
+    {{ __('projects/tasks.timesReceipt.total_bn') }}: <b>@moneyFormat(array_sum($finances[$task->id])*1.06)</b><br />
 </p>
 
 <table style="width: 100%;" border="1">
@@ -48,6 +49,10 @@
         <tr>
             <th style="text-align: right" colspan="4">{{ __('projects/tasks.timesReceipt.table.total') }}:</th>
             <th>@moneyFormat(array_sum($finances[$task->id]))</th>
+        </tr>
+        <tr>
+            <th style="text-align: right" colspan="4">{{ __('projects/tasks.timesReceipt.table.total_bn') }}:</th>
+            <th>@moneyFormat(array_sum($finances[$task->id])*1.06)</th>
         </tr>
     </tfoot>
 </table>
