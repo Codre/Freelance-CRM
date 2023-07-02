@@ -20,7 +20,6 @@
             <th>{{ __('projects/tasks.timesReceipt.table.date') }}</th>
             <th>{{ __('projects/tasks.timesReceipt.table.time') }}</th>
             <th>{{ __('projects/tasks.timesReceipt.table.comment') }}</th>
-            <th>{{ __('projects/tasks.timesReceipt.table.user') }}</th>
             <th>{{ __('projects/tasks.timesReceipt.table.price') }}</th>
         </tr>
     </thead>
@@ -36,9 +35,7 @@
                 <td>
                     {{ $time->comment }}
                 </td>
-                <td>
-                    {{ $time->user->name }}
-                </td>
+
                 <td style="text-align: center">
                     @moneyFormat($finances[$task->id][$time->id])
                 </td>
@@ -47,11 +44,11 @@
     </tbody>
     <tfoot>
         <tr>
-            <th style="text-align: right" colspan="4">{{ __('projects/tasks.timesReceipt.table.total') }}:</th>
+            <th style="text-align: right" colspan="3">{{ __('projects/tasks.timesReceipt.table.total') }}:</th>
             <th>@moneyFormat(array_sum($finances[$task->id]))</th>
         </tr>
         <tr>
-            <th style="text-align: right" colspan="4">{{ __('projects/tasks.timesReceipt.table.total_bn') }}:</th>
+            <th style="text-align: right" colspan="3">{{ __('projects/tasks.timesReceipt.table.total_bn') }}:</th>
             <th>@moneyFormat(array_sum($finances[$task->id])*1.06)</th>
         </tr>
     </tfoot>
