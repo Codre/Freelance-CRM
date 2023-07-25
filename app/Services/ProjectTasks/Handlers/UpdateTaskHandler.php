@@ -32,9 +32,9 @@ class UpdateTaskHandler
 
     public function handle(ProjectTask $task, array $data): ProjectTask
     {
-        $task = $this->projectTasksRepository->updateFromArray($task, $data);
+        $this->projectTasksRepository->updateFromArray($task, $data);
 
-        TaskUpdating::dispatch($task, \Auth::user())->onQueue(Queue::LOW);
+        # TaskUpdating::dispatch($task, \Auth::user())->onQueue(Queue::LOW);
 
         return $task;
     }
