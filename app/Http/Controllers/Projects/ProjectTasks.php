@@ -40,15 +40,16 @@ class ProjectTasks extends Controller
     /**
      * ProjectTasks constructor.
      *
-     * @param  ProjectTasksService     $projectTasksService
-     * @param  TaskTimesService        $taskTimesService
-     * @param  ProjectFinancesService  $projectFinancesService
+     * @param ProjectTasksService $projectTasksService
+     * @param TaskTimesService $taskTimesService
+     * @param ProjectFinancesService $projectFinancesService
      */
     public function __construct(
-        ProjectTasksService $projectTasksService,
-        TaskTimesService $taskTimesService,
+        ProjectTasksService    $projectTasksService,
+        TaskTimesService       $taskTimesService,
         ProjectFinancesService $projectFinancesService
-    ) {
+    )
+    {
         $this->projectTasksService = $projectTasksService;
         $this->taskTimesService = $taskTimesService;
         $this->projectFinancesService = $projectFinancesService;
@@ -57,7 +58,7 @@ class ProjectTasks extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  Project  $project
+     * @param Project $project
      *
      * @return View
      * @throws AuthorizationException
@@ -78,9 +79,9 @@ class ProjectTasks extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  StoreProjectTaskRequest  $request
+     * @param StoreProjectTaskRequest $request
      *
-     * @param  Project                  $project
+     * @param Project $project
      *
      * @return Redirector
      * @throws AuthorizationException
@@ -101,8 +102,8 @@ class ProjectTasks extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Project      $project
-     * @param  ProjectTask  $task
+     * @param Project $project
+     * @param ProjectTask $task
      *
      * @return View
      * @throws AuthorizationException
@@ -113,12 +114,13 @@ class ProjectTasks extends Controller
 
         $comments = $task->comments()->orderBy('created_at', 'desc')->with(['user'])->get();
         $files = $task->files()->orderBy('updated_at', 'desc')->with(['user'])->get();
+        $earning = $this->projectFinancesService->calcFinanceByTaskIdsForCurrentUser($project, [$task->id]);
 
         $timeStarted = false;
         if (Gate::allows('projectTask.update', $task) && Gate::allows('projectTask.run', $task)) {
             $timeStarted = $task->times()
-                ->where('user_id', '=', Auth()->id())->whereNull('ended')
-                ->get()->first();
+                                ->where('user_id', '=', Auth()->id())->whereNull('ended')
+                                ->get()->first();
         }
 
         return view('projects.tasks.show')->with(
@@ -128,6 +130,7 @@ class ProjectTasks extends Controller
                 'comments'    => $comments,
                 'statuses'    => ProjectTask::getStatuses(),
                 'task'        => $task,
+                'earning'     => $earning[$task->id] ?? 0,
                 'files'       => $files,
                 'times'       => $this->projectTasksService->getTimesByTask($task),
                 'timeStarted' => $timeStarted,
@@ -139,8 +142,8 @@ class ProjectTasks extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Project      $project
-     * @param  ProjectTask  $task
+     * @param Project $project
+     * @param ProjectTask $task
      *
      * @return View
      * @throws AuthorizationException
@@ -162,9 +165,9 @@ class ProjectTasks extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateProjectTaskRequest  $request
-     * @param  Project                   $project
-     * @param  ProjectTask               $task
+     * @param UpdateProjectTaskRequest $request
+     * @param Project $project
+     * @param ProjectTask $task
      *
      * @return Redirector
      * @throws AuthorizationException
@@ -181,8 +184,8 @@ class ProjectTasks extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Project      $project
-     * @param  ProjectTask  $task
+     * @param Project $project
+     * @param ProjectTask $task
      *
      * @return Redirector
      * @throws AuthorizationException
@@ -199,9 +202,9 @@ class ProjectTasks extends Controller
     /**
      * Переключения процесса выполнения задачи
      *
-     * @param  Request      $request
-     * @param  Project      $project
-     * @param  ProjectTask  $task
+     * @param Request $request
+     * @param Project $project
+     * @param ProjectTask $task
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|Redirector
      * @throws AuthorizationException
@@ -212,8 +215,8 @@ class ProjectTasks extends Controller
         $this->authorize('projectTask.run', $task);
 
         $timeStarted = $task->times()
-            ->where('user_id', '=', Auth()->id())->whereNull('ended')
-            ->get()->first();
+                            ->where('user_id', '=', Auth()->id())->whereNull('ended')
+                            ->get()->first();
 
         if ($timeStarted) {
             $this->taskTimesService->stop($timeStarted);
@@ -227,9 +230,9 @@ class ProjectTasks extends Controller
     /**
      * Процесс отправки задачи на проверку
      *
-     * @param  Request      $request
-     * @param  Project      $project
-     * @param  ProjectTask  $task
+     * @param Request $request
+     * @param Project $project
+     * @param ProjectTask $task
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|Redirector
      * @throws AuthorizationException
@@ -247,9 +250,9 @@ class ProjectTasks extends Controller
     /**
      * Процесс завершения задачи
      *
-     * @param  Request      $request
-     * @param  Project      $project
-     * @param  ProjectTask  $task
+     * @param Request $request
+     * @param Project $project
+     * @param ProjectTask $task
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|Redirector
      * @throws AuthorizationException
@@ -266,8 +269,8 @@ class ProjectTasks extends Controller
     /**
      * Отчёт по времени
      *
-     * @param  Project      $project
-     * @param  ProjectTask  $task
+     * @param Project $project
+     * @param ProjectTask $task
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|View
      * @throws AuthorizationException
@@ -278,9 +281,9 @@ class ProjectTasks extends Controller
 
         return view('projects.tasks.timesReceipt')->with(
             [
-                'task'  => $task,
-                'project' => $project,
-                'times' => $this->projectTasksService->getTimesByTask($task),
+                'task'     => $task,
+                'project'  => $project,
+                'times'    => $this->projectTasksService->getTimesByTask($task),
                 'finances' => $this->projectFinancesService->calcFinanceByTaskIdsUserDetailed($project, [$task->id])
             ]
         );

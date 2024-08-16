@@ -136,6 +136,11 @@
                             list='{!! $times->toJson() !!}'></ProjectTaskTimeList>
                 </b-tab>
             @endcan
+            <b-tab disabled>
+                <template #title>
+                    @if(empty($earning))-@else @moneyFormat($earning) @endif
+                </template>
+            </b-tab>
         </b-tabs>
     </div>
 @endsection
